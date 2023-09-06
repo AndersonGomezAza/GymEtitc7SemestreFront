@@ -23,6 +23,9 @@ import { ImplementosComponent } from './components/implementos/implementos.compo
 import { MaquinariasComponent } from './components/maquinarias/maquinarias.component';
 import { PlanesComponent } from './components/planes/planes.component';
 import { InicioComponent } from './components/inicio/inicio.component';
+import { RutinasComponent } from './components/rutinas/rutinas.component';
+import { UsuariosComponent } from './components/usuarios/usuarios.component';
+import { ValoracionesComponent } from './components/valoraciones/valoraciones.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +35,10 @@ import { InicioComponent } from './components/inicio/inicio.component';
     ImplementosComponent,
     MaquinariasComponent,
     PlanesComponent,
-    InicioComponent
+    InicioComponent,
+    RutinasComponent,
+    UsuariosComponent,
+    ValoracionesComponent
   ],
   imports: [
     BrowserModule,
