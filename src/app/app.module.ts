@@ -26,6 +26,8 @@ import { InicioComponent } from './components/inicio/inicio.component';
 import { RutinasComponent } from './components/rutinas/rutinas.component';
 import { UsuariosComponent } from './components/usuarios/usuarios.component';
 import { ValoracionesComponent } from './components/valoraciones/valoraciones.component';
+import { AvatarModule } from 'ngx-avatars';
+
 
 @NgModule({
   declarations: [
@@ -57,6 +59,7 @@ import { ValoracionesComponent } from './components/valoraciones/valoraciones.co
     MatMenuModule,
     HttpClientModule,
     MatTreeModule,
+    AvatarModule
   ],
   providers: [],
   bootstrap: [AppComponent]
