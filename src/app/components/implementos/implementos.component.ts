@@ -13,5 +13,6 @@ export class ImplementosComponent implements OnInit{
 
   ngOnInit(): void {
     this.apiService.Get("Implementos");
+    this.apiService.getById("Implementos", '1');
   }
 }
