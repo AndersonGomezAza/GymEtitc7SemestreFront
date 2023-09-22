@@ -12,10 +12,10 @@ export class ApiService {
 
   public async Get (gatewayController: string){
     var respo:any;
-    await this.api.get(this.apiUrl+gatewayController).toPromise().then((res=>{
-      console.log(res);
+    await this.api.get(this.apiUrl+gatewayController).toPromise().then((res)=>{
+      respo = res;
     })
-    )
+    return respo;
   }
 
   public async getById (gatewayController: string, idBody: string){
