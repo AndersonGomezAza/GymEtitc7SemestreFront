@@ -9,7 +9,7 @@ import { ApiService } from 'src/app/services/api.service';
   templateUrl: './maquinarias.component.html',
   styleUrls: ['./maquinarias.component.css']
 })
-export class MaquinariasComponent implements OnInit{
+export class MaquinariasComponent implements OnInit, AfterViewInit{
   displayedColumns: string[] = ['idMaquinaria', 'nombreMaquinaria', 'descripcionMaquinaria', 'categoriaMaquinaria', 'estadoMaquinaria', 'serialMaquinaria'];
   dataSource: MatTableDataSource<any>;
   @ViewChild(MatPaginator) paginator: MatPaginator;
