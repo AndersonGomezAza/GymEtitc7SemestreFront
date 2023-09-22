@@ -8,6 +8,7 @@ import { MenuComponent } from './components/menu/menu.component';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
 import { MatTableModule } from '@angular/material/table';
@@ -27,6 +28,7 @@ import { RutinasComponent } from './components/rutinas/rutinas.component';
 import { UsuariosComponent } from './components/usuarios/usuarios.component';
 import { ValoracionesComponent } from './components/valoraciones/valoraciones.component';
 import { AvatarModule } from 'ngx-avatars';
+import { MatFormFieldModule } from '@angular/material/form-field';
 
 
 @NgModule({
@@ -59,7 +61,10 @@ import { AvatarModule } from 'ngx-avatars';
     MatMenuModule,
     HttpClientModule,
     MatTreeModule,
-    AvatarModule
+    AvatarModule,
+    MatTableModule,
+    MatFormFieldModule,
+    MatInputModule
   ],
   providers: [],
   bootstrap: [AppComponent]
