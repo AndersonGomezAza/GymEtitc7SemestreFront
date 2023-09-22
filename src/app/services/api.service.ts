@@ -15,6 +15,7 @@ export class ApiService {
     await this.api.get(this.apiUrl+gatewayController).toPromise().then((res)=>{
       respo = res;
     })
+    console.log(respo);
     return respo;
   }
 

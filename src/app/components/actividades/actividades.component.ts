@@ -33,10 +33,6 @@ export class ActividadesComponent implements OnInit, AfterViewInit {
     });
   }
 
-  loadTable(data:any[]){
-    this.displayedColumns=['idActividad', 'descripcionActividad', 'duracionMinActividad', 'categoriaActividad'];
-  }
-
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
