@@ -11,7 +11,7 @@ import { ApiService } from 'src/app/services/api.service';
 })
 export class PlanesComponent implements OnInit, AfterViewInit {
 
-  displayedColumns: string[] = ['idPlan', 'descripcionPlan', 'duracionMesesPlan', 'valorPlan'];
+  displayedColumns: string[] = ['idPlan', 'descripcionPlan', 'duracionMesesPlan', 'valorPlan', 'acciones'];
   dataSource: MatTableDataSource<any>;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
@@ -21,6 +21,7 @@ export class PlanesComponent implements OnInit, AfterViewInit {
     descripcionPlan: 'Descripcion',
     duracionMesesPlan: 'Duracion Meses',
     valorPlan: 'Precio',
+    acciones: 'Acciones',
   };
 
   constructor(public apiService: ApiService) {

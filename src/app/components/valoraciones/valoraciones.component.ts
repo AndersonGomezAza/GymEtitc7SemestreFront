@@ -11,7 +11,7 @@ import { ApiService } from 'src/app/services/api.service';
 })
 export class ValoracionesComponent implements OnInit{
 
-  displayedColumns: string[] = ['fechaValoracion', 'categoriaValoracion', 'descripcionValoracion', 'nombres', 'apellidos', ];
+  displayedColumns: string[] = ['fechaValoracion', 'categoriaValoracion', 'descripcionValoracion', 'nombres', 'apellidos', 'acciones'];
   dataSource: MatTableDataSource<any>;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
@@ -23,6 +23,7 @@ export class ValoracionesComponent implements OnInit{
     descripcionValoracion: 'Descripción',
     nombres: 'Nombres Cliente',
     apellidos: 'Apellidos Cliente',
+    acciones: 'Acciones',
   };
 
   constructor(public apiService: ApiService) {

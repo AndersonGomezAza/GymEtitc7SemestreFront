@@ -10,7 +10,7 @@ import { ApiService } from 'src/app/services/api.service';
   styleUrls: ['./maquinarias.component.css']
 })
 export class MaquinariasComponent implements OnInit, AfterViewInit{
-  displayedColumns: string[] = ['idMaquinaria', 'nombreMaquinaria', 'descripcionMaquinaria', 'categoriaMaquinaria', 'estadoMaquinaria', 'serialMaquinaria'];
+  displayedColumns: string[] = ['idMaquinaria', 'nombreMaquinaria', 'descripcionMaquinaria', 'categoriaMaquinaria', 'estadoMaquinaria', 'serialMaquinaria', 'acciones'];
   dataSource: MatTableDataSource<any>;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
@@ -22,6 +22,7 @@ export class MaquinariasComponent implements OnInit, AfterViewInit{
     categoriaMaquinaria: 'Categoria',
     estadoMaquinaria: 'Estado',
     serialMaquinaria: 'Serial',
+    acciones: 'Acciones',
   };
 
   constructor(public apiService: ApiService) {

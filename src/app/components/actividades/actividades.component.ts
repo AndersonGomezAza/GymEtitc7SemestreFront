@@ -11,7 +11,7 @@ import { ApiService } from 'src/app/services/api.service';
 })
 export class ActividadesComponent implements OnInit, AfterViewInit {
 
-  displayedColumns: string[] = ['idActividad', 'descripcionActividad', 'duracionMinActividad', 'categoriaActividad'];
+  displayedColumns: string[] = ['idActividad', 'descripcionActividad', 'duracionMinActividad', 'categoriaActividad', 'acciones'];
   dataSource: MatTableDataSource<any>;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
@@ -21,6 +21,7 @@ export class ActividadesComponent implements OnInit, AfterViewInit {
     descripcionActividad: 'Descripcion',
     duracionMinActividad: 'Duracion Minutos',
     categoriaActividad: 'Categoria',
+    acciones: 'Acciones',
   };
 
   constructor(public apiService: ApiService) {
