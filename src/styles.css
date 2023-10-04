@@ -24,10 +24,27 @@ mat-form-field {
   text-align: center;
   color: white;
   box-shadow: 3px 3px 10px rgb(46, 46, 46);
+  cursor: pointer;
 }
 
 .container-acciones {
   display: flex;
   justify-content: center;
   gap: 15px;
+}
+
+.form-components {
+  width: 80%;
+  margin: 0 auto;
+  box-shadow: 5px 10px 10px gray;
+}
+
+.form-components mat-card-header {
+  width: 100;
+  margin: 20px auto;
+}
+
+.form-components button {
+  width: 20%;
+  margin: 0 auto 20px auto;
 }

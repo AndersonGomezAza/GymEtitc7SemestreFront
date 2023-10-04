@@ -29,6 +29,10 @@ import { UsuariosComponent } from './components/usuarios/usuarios.component';
 import { ValoracionesComponent } from './components/valoraciones/valoraciones.component';
 import { AvatarModule } from 'ngx-avatars';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { FormActividadesComponent } from './components/forms/form-actividades/form-actividades.component';
+import { MatSelectModule } from '@angular/material/select';
+import { MatRadioModule } from '@angular/material/radio';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -42,7 +46,8 @@ import { MatFormFieldModule } from '@angular/material/form-field';
     InicioComponent,
     RutinasComponent,
     UsuariosComponent,
-    ValoracionesComponent
+    ValoracionesComponent,
+    FormActividadesComponent
   ],
   imports: [
     BrowserModule,
@@ -64,7 +69,10 @@ import { MatFormFieldModule } from '@angular/material/form-field';
     AvatarModule,
     MatTableModule,
     MatFormFieldModule,
-    MatInputModule
+    MatInputModule,
+    MatSelectModule,
+    MatRadioModule,
+    ReactiveFormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
