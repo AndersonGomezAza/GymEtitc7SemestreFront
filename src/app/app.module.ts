@@ -33,6 +33,7 @@ import { FormActividadesComponent } from './components/forms/form-actividades/fo
 import { MatSelectModule } from '@angular/material/select';
 import { MatRadioModule } from '@angular/material/radio';
 import { ReactiveFormsModule } from '@angular/forms';
+import { FormUsuariosComponent } from './components/forms/form-usuarios/form-usuarios.component';
 
 
 @NgModule({
@@ -47,7 +48,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     RutinasComponent,
     UsuariosComponent,
     ValoracionesComponent,
-    FormActividadesComponent
+    FormActividadesComponent,
+    FormUsuariosComponent
   ],
   imports: [
     BrowserModule,
