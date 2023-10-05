@@ -1,4 +1,4 @@
-<form [formGroup]="usuariosForm" novalidate (ngSubmit)="onSubmit()">
+<form [formGroup]="usuariosForm" novalidate (ngSubmit)="onSubmit()" class="form-components">
   <mat-card class="shipping-card">
     <mat-card-header>
       <mat-card-title>Crear Usuario</mat-card-title>
@@ -14,13 +14,15 @@
           </mat-form-field>
         </div>
       </div>
-      <div class="col">
-        <mat-form-field class="full-width">
-          <input matInput placeholder="Apellido" formControlName="Apellido">
-          <mat-error *ngIf="usuariosForm.controls['Apellido'].hasError('required')">
-            El apellido es <strong>Requerido</strong>
-          </mat-error>
-        </mat-form-field>
+      <div class="row">
+        <div class="col">
+          <mat-form-field class="full-width">
+            <input matInput placeholder="Apellido" formControlName="Apellido">
+            <mat-error *ngIf="usuariosForm.controls['Apellido'].hasError('required')">
+              El apellido es <strong>Requerido</strong>
+            </mat-error>
+          </mat-form-field>
+        </div>
       </div>
       <div class="row">
         <div class="col">
