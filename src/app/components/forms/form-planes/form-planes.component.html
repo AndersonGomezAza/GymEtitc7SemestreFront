@@ -1,0 +1,49 @@
+<form [formGroup]="planesForm" novalidate (ngSubmit)="onSubmit()" class="form-components">
+  <mat-card class="shipping-card">
+    <mat-card-header>
+      <mat-card-title>Registrar Plan</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <div class="row">
+        <div class="col">
+          <mat-form-field class="full-width">
+            <input matInput placeholder="Descripcion" formControlName="Descripcion">
+            <mat-error *ngIf="planesForm.controls['Descripcion'].hasError('required')">
+              la Descripcion del implemento es <strong>Requerida</strong>
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <mat-form-field class="full-width">
+            <input matInput type="number" placeholder="Duracion Minutos" formControlName="Duracion">
+            <mat-error *ngIf="planesForm.controls['Duracion'].hasError('required')">
+              La duracion en meses del plan es <strong>Requerido</strong>
+            </mat-error>
+            <mat-error *ngIf="planesForm.controls['Duracion'].hasError('max')">
+              maximo 12 meses para los planes
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div class="col">
+          <mat-form-field floatLabel="always">
+            <mat-label>Precio</mat-label>
+            <input matInput type="number" class="example-right-align" placeholder="0" formControlName="Precio">
+            <span matTextPrefix>$&nbsp;</span>
+            <span matTextSuffix>.00</span>
+            <mat-error *ngIf="planesForm.controls['Precio'].hasError('required')">
+              El precio del plan es <strong>Requerido</strong>
+            </mat-error>
+            <mat-error *ngIf="planesForm.controls['Precio'].hasError('pattern')">
+              El precio sin puntos ni comas.
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-raised-button color="primary" type="submit">Crear</button>
+    </mat-card-actions>
+  </mat-card>
+</form>
