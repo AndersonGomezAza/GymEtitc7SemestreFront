@@ -17,7 +17,7 @@ export class ImplementosComponent implements OnInit, AfterViewInit{
   @ViewChild(MatSort) sort: MatSort;
 
   columnHeaders = {
-    idImplemento: 'Id Actividad',
+    idImplemento: 'Id Implemento',
     nombreImplemento: 'Nombre',
     descripcionImplemento: 'Descripcion',
     categoriaImplemento: 'Categoria',

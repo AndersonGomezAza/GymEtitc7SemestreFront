@@ -34,6 +34,9 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatRadioModule } from '@angular/material/radio';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FormUsuariosComponent } from './components/forms/form-usuarios/form-usuarios.component';
+import { FormImplementosComponent } from './components/forms/form-implementos/form-implementos.component';
+import { FormMaquinariasComponent } from './components/forms/form-maquinarias/form-maquinarias.component';
+import { FormPlanesComponent } from './components/forms/form-planes/form-planes.component';
 
 
 @NgModule({
@@ -49,7 +52,10 @@ import { FormUsuariosComponent } from './components/forms/form-usuarios/form-usu
     UsuariosComponent,
     ValoracionesComponent,
     FormActividadesComponent,
-    FormUsuariosComponent
+    FormUsuariosComponent,
+    FormImplementosComponent,
+    FormMaquinariasComponent,
+    FormPlanesComponent
   ],
   imports: [
     BrowserModule,

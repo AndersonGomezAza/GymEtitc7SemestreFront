@@ -17,7 +17,7 @@ export class PlanesComponent implements OnInit, AfterViewInit {
   @ViewChild(MatSort) sort: MatSort;
 
   columnHeaders = {
-    idPlan: 'Id Actividad',
+    idPlan: 'Id Plan',
     descripcionPlan: 'Descripcion',
     duracionMesesPlan: 'Duracion Meses',
     valorPlan: 'Precio',

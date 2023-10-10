@@ -16,7 +16,7 @@ export class MaquinariasComponent implements OnInit, AfterViewInit{
   @ViewChild(MatSort) sort: MatSort;
 
   columnHeaders = {
-    idMaquinaria: 'Id Actividad',
+    idMaquinaria: 'Id Maquinaria',
     nombreMaquinaria: 'Nombre',
     descripcionMaquinaria: 'Descripcion',
     categoriaMaquinaria: 'Categoria',
