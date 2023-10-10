@@ -1,0 +1,58 @@
+<form [formGroup]="rutinasForm" novalidate (ngSubmit)="onSubmit()" class="form-components">
+  <mat-card class="shipping-card">
+    <mat-card-header>
+      <mat-card-title>Registrar Rutina</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <div class="row">
+        <div class="col">
+          <mat-form-field class="full-width">
+            <input matInput placeholder="Calorias" formControlName="Calorias">
+            <mat-error *ngIf="rutinasForm.controls['Calorias'].hasError('required')">
+              La cantidad de calorias es <strong>Requerida</strong>
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div class="col">
+          <mat-form-field class="full-width">
+            <input matInput placeholder="Nombre" formControlName="Nombre">
+            <mat-error *ngIf="rutinasForm.controls['Nombre'].hasError('required')">
+              El nombre de la actividad es <strong>Requerida</strong>
+            </mat-error>
+          </mat-form-field>
+        </div>
+        </div>
+      <div class="row">
+        <div class="col">
+          <mat-form-field class="full-width">
+            <input matInput placeholder="Descripcion" formControlName="Descripcion">
+            <mat-error *ngIf="rutinasForm.controls['Descripcion'].hasError('required')">
+              La descricpción de la actividad es <strong>Requerida</strong>
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div class="col">
+          <mat-form-field class="full-width">
+            <input matInput placeholder="Categoria" formControlName="Categoria">
+            <mat-error *ngIf="rutinasForm.controls['Categoria'].hasError('required')">
+              La categoria de la actividad es <strong>Requerida</strong>
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <mat-form-field class="full-width">
+            <input matInput type="number" placeholder="Tiempo " formControlName="Tiempo">
+            <mat-error *ngIf="rutinasForm.controls['Tiempo'].hasError('required')">
+              La el tiempo de la rutina es <strong>Requerida</strong>
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-raised-button color="primary" type="submit">Crear</button>
+    </mat-card-actions>
+  </mat-card>
+</form>

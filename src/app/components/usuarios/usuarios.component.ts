@@ -11,7 +11,7 @@ import { ApiService } from 'src/app/services/api.service';
 })
 export class UsuariosComponent implements OnInit {
 
-  displayedColumns: string[] = ['numDocumento', 'nombres', 'apellidos', 'descripcionPlan', 'acciones'];
+  displayedColumns: string[] = ['numDocumento', 'nombres', 'apellidos', 'descripcionPlan', 'planId', 'acciones'];
   dataSource: MatTableDataSource<any>;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
@@ -22,6 +22,7 @@ export class UsuariosComponent implements OnInit {
     apellidos: 'Apellido',
     descripcionPlan: 'descripcion Plan',
     acciones: 'Acciones',
+    planId: 'Id Plan'
   };
 
   constructor(public apiService: ApiService) {

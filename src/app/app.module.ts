@@ -37,6 +37,10 @@ import { FormUsuariosComponent } from './components/forms/form-usuarios/form-usu
 import { FormImplementosComponent } from './components/forms/form-implementos/form-implementos.component';
 import { FormMaquinariasComponent } from './components/forms/form-maquinarias/form-maquinarias.component';
 import { FormPlanesComponent } from './components/forms/form-planes/form-planes.component';
+import { FormRutinasComponent } from './components/forms/form-rutinas/form-rutinas.component';
+import { FormValoracionesComponent } from './components/forms/form-valoraciones/form-valoraciones.component';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
 
 
 @NgModule({
@@ -55,7 +59,9 @@ import { FormPlanesComponent } from './components/forms/form-planes/form-planes.
     FormUsuariosComponent,
     FormImplementosComponent,
     FormMaquinariasComponent,
-    FormPlanesComponent
+    FormPlanesComponent,
+    FormRutinasComponent,
+    FormValoracionesComponent, 
   ],
   imports: [
     BrowserModule,
@@ -81,6 +87,9 @@ import { FormPlanesComponent } from './components/forms/form-planes/form-planes.
     MatSelectModule,
     MatRadioModule,
     ReactiveFormsModule,
+    MatDatepickerModule,
+    MatInputModule,
+    MatNativeDateModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

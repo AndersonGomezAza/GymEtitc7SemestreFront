@@ -14,7 +14,8 @@ export class FormUsuariosComponent {
     Nombre: [null, [Validators.required, Validators.maxLength(30)]],
     Apellido: [null, [Validators.required, Validators.maxLength(30)]],
     Descripcion: [null, [Validators.required, Validators.max(150)]],
-    Acciones: [null, [Validators.required, Validators.maxLength(20)]]
+    Acciones: [null, [Validators.required, Validators.maxLength(20)]],
+    PlanID: [null, [Validators.required]],
   });
 
 

@@ -1,0 +1,60 @@
+<form [formGroup]="valoracionesForm" novalidate (ngSubmit)="onSubmit()">
+  <mat-card class="shipping-card">
+    <mat-card-header>
+      <mat-card-title>Registrar Valoraciones</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <div class="row">
+        <div class="col">
+          <mat-form-field class="full-width">
+            <input matInput [matDatepicker]="picker" placeholder="Fecha" formControlName="Fecha">
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+            <mat-error *ngIf="valoracionesForm.controls['Fecha'].hasError('required')">
+              La fecha es <strong>Requerida</strong>
+            </mat-error>
+          </mat-form-field> 
+        </div>      
+        <div class="col">
+          <mat-form-field class="full-width">
+            <input matInput placeholder="Categoria" formControlName="Categoria">
+            <mat-error *ngIf="valoracionesForm.controls['Categoria'].hasError('required')">
+              La categoria de la actividad es <strong>Requerida</strong>
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+        <div class="row">
+          <div class="col">
+            <mat-form-field class="full-width">
+              <input matInput placeholder="Descripcion" formControlName="Descripcion">
+              <mat-error *ngIf="valoracionesForm.controls['Descripcion'].hasError('required')">
+                La descricpción de la actividad es <strong>Requerida</strong>
+              </mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <mat-form-field class="full-width">
+              <input matInput placeholder="Nombres" formControlName="Nombres">
+              <mat-error *ngIf="valoracionesForm.controls['Nombres'].hasError('required')">
+                Los nombres para las valoraciones son <strong>Requeridos</strong>
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <div class="col">
+            <mat-form-field class="full-width">
+              <input matInput placeholder="Apellidos" formControlName="Apellidos">
+              <mat-error *ngIf="valoracionesForm.controls['Apellidos'].hasError('required')">
+                Los apellidos para las valoraciones son <strong>Requeridos</strong>
+              </mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-raised-button color="primary" type="submit">Crear</button>
+    </mat-card-actions>
+  </mat-card>
+</form>
