@@ -1,30 +1,38 @@
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
-import { MatPaginator } from '@angular/material/paginator';
-import { MatSort } from '@angular/material/sort';
-import { MatTableDataSource } from '@angular/material/table';
+import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
+import { MatSort, MatSortModule } from '@angular/material/sort';
+import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { ApiService } from 'src/app/services/api.service';
+import { MatDialog, MatDialogModule } from '@angular/material/dialog';
+import { MatButtonModule } from '@angular/material/button';
+import { CommonModule } from '@angular/common';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { FormActividadesComponent } from '../forms/form-actividades/form-actividades.component';
 
 @Component({
   selector: 'app-actividades',
   templateUrl: './actividades.component.html',
-  styleUrls: ['./actividades.component.css']
+  styleUrls: ['./actividades.component.css'],
+  standalone: true,
+  imports: [CommonModule, MatButtonModule, MatDialogModule, MatFormFieldModule, MatTableModule, MatPaginatorModule,
+    MatSortModule, MatInputModule],
 })
 export class ActividadesComponent implements OnInit, AfterViewInit {
 
-  displayedColumns: string[] = ['idActividad', 'descripcionActividad', 'duracionMinActividad', 'categoriaActividad', 'acciones'];
+  displayedColumns: string[] = ['descripcionActividad', 'duracionMinActividad', 'categoriaActividad', 'acciones'];
   dataSource: MatTableDataSource<any>;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
   columnHeaders = {
-    idActividad: 'Id Actividad',
     descripcionActividad: 'Descripcion',
     duracionMinActividad: 'Duracion Minutos',
     categoriaActividad: 'Categoria',
     acciones: 'Acciones',
   };
 
-  constructor(public apiService: ApiService) {
+  constructor(public apiService: ApiService, public dialog: MatDialog) {
     this.dataSource = new MatTableDataSource()
   }
 
@@ -46,5 +54,11 @@ export class ActividadesComponent implements OnInit, AfterViewInit {
     if (this.dataSource.paginator) {
       this.dataSource.paginator.firstPage();
     }
+  }
+
+  openDialog() {
+    this.dialog.open(FormActividadesComponent, {
+      width: '60%',
+    });
   }
 }

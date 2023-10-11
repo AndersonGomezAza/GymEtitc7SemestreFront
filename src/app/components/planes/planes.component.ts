@@ -11,13 +11,12 @@ import { ApiService } from 'src/app/services/api.service';
 })
 export class PlanesComponent implements OnInit, AfterViewInit {
 
-  displayedColumns: string[] = ['idPlan', 'descripcionPlan', 'duracionMesesPlan', 'valorPlan', 'acciones'];
+  displayedColumns: string[] = ['descripcionPlan', 'duracionMesesPlan', 'valorPlan', 'acciones'];
   dataSource: MatTableDataSource<any>;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
   columnHeaders = {
-    idPlan: 'Id Plan',
     descripcionPlan: 'Descripcion',
     duracionMesesPlan: 'Duracion Meses',
     valorPlan: 'Precio',

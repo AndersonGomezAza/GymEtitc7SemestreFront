@@ -1,6 +1,7 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 
 import { FormBuilder, Validators } from '@angular/forms';
+import { ApiService } from 'src/app/services/api.service';
 
 
 @Component({
@@ -8,7 +9,9 @@ import { FormBuilder, Validators } from '@angular/forms';
   templateUrl: './form-usuarios.component.html',
   styleUrls: ['./form-usuarios.component.css']
 })
-export class FormUsuariosComponent {
+export class FormUsuariosComponent implements OnInit{
+  dataPlan;
+
   private fb = inject(FormBuilder);
   usuariosForm = this.fb.group({
     Nombre: [null, [Validators.required, Validators.maxLength(30)]],
@@ -17,8 +20,13 @@ export class FormUsuariosComponent {
     Acciones: [null, [Validators.required, Validators.maxLength(20)]]
   });
 
+  constructor (public apiService: ApiService){}
 
-  hasUnitNumber = false;
+  ngOnInit(): void {
+    this.apiService.Get("Planes").then(res=>{
+      this.dataPlan = res
+    });
+  }
 
 
   onSubmit(): void {
