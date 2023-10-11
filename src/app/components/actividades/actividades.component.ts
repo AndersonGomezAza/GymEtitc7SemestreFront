@@ -20,13 +20,12 @@ import { FormActividadesComponent } from '../forms/form-actividades/form-activid
 })
 export class ActividadesComponent implements OnInit, AfterViewInit {
 
-  displayedColumns: string[] = ['idActividad', 'descripcionActividad', 'duracionMinActividad', 'categoriaActividad', 'acciones'];
+  displayedColumns: string[] = ['descripcionActividad', 'duracionMinActividad', 'categoriaActividad', 'acciones'];
   dataSource: MatTableDataSource<any>;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
   columnHeaders = {
-    idActividad: 'Id Actividad',
     descripcionActividad: 'Descripcion',
     duracionMinActividad: 'Duracion Minutos',
     categoriaActividad: 'Categoria',
@@ -58,6 +57,8 @@ export class ActividadesComponent implements OnInit, AfterViewInit {
   }
 
   openDialog() {
-    this.dialog.open(FormActividadesComponent);
+    this.dialog.open(FormActividadesComponent, {
+      width: '60%',
+    });
   }
 }

@@ -11,16 +11,15 @@ import { ApiService } from 'src/app/services/api.service';
 })
 export class RutinasComponent implements OnInit, AfterViewInit {
 
-  displayedColumns: string[] = ['idRutina', 'caloriasRutina', 'descripcionRutina', 'nombreRutina', 'categoriaRutina', 'tiempoRutinaMin', 'acciones'];
+  displayedColumns: string[] = ['nombreRutina', 'caloriasRutina', 'descripcionRutina', 'categoriaRutina', 'tiempoRutinaMin', 'acciones'];
   dataSource: MatTableDataSource<any>;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
   columnHeaders = {
-    idRutina:'Id Rutina',
+    nombreRutina: 'Nombre',
     caloriasRutina: 'Calorias',
     descripcionRutina: 'Descripcion',
-    nombreRutina: 'Nombre',
     categoriaRutina: 'Categoria',
     tiempoRutinaMin: 'Tiempo',
     acciones: 'Acciones',

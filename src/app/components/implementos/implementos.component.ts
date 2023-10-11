@@ -11,13 +11,12 @@ import { ApiService } from 'src/app/services/api.service';
 })
 export class ImplementosComponent implements OnInit, AfterViewInit{
 
-  displayedColumns: string[] = ['idImplemento', 'nombreImplemento', 'descripcionImplemento', 'categoriaImplemento', 'acciones'];
+  displayedColumns: string[] = ['nombreImplemento', 'descripcionImplemento', 'categoriaImplemento', 'acciones'];
   dataSource: MatTableDataSource<any>;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
   columnHeaders = {
-    idImplemento: 'Id Implemento',
     nombreImplemento: 'Nombre',
     descripcionImplemento: 'Descripcion',
     categoriaImplemento: 'Categoria',

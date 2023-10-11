@@ -54,6 +54,8 @@ mat-form-field {
 
 
 .registrar {
+  z-index: 0;
+  position: relative;
   display: flex;
   margin: 20px auto;
   justify-content: space-evenly;
