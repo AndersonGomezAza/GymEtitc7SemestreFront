@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -17,6 +17,7 @@ import { MatSortModule } from '@angular/material/sort';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatCardModule } from '@angular/material/card';
 import { MatMenuModule } from '@angular/material/menu';
+import { MAT_DIALOG_DEFAULT_OPTIONS, MatDialogModule } from '@angular/material/dialog';
 import { HttpClientModule } from '@angular/common/http';
 import { MatTreeModule } from '@angular/material/tree';
 import { ActividadesComponent } from './components/actividades/actividades.component';
@@ -37,13 +38,13 @@ import { FormUsuariosComponent } from './components/forms/form-usuarios/form-usu
 import { FormImplementosComponent } from './components/forms/form-implementos/form-implementos.component';
 import { FormMaquinariasComponent } from './components/forms/form-maquinarias/form-maquinarias.component';
 import { FormPlanesComponent } from './components/forms/form-planes/form-planes.component';
+import { CommonModule } from '@angular/common';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     MenuComponent,
-    ActividadesComponent,
     ImplementosComponent,
     MaquinariasComponent,
     PlanesComponent,
@@ -62,6 +63,8 @@ import { FormPlanesComponent } from './components/forms/form-planes/form-planes.
     AppRoutingModule,
     BrowserAnimationsModule,
     MatToolbarModule,
+    CommonModule,
+    MatDialogModule,
     MatButtonModule,
     MatSidenavModule,
     MatIconModule,
@@ -82,7 +85,10 @@ import { FormPlanesComponent } from './components/forms/form-planes/form-planes.
     MatRadioModule,
     ReactiveFormsModule,
   ],
-  providers: [],
+  schemas: [ CUSTOM_ELEMENTS_SCHEMA ],
+  providers: [
+    {provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: {hasBackdrop: false}}
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
