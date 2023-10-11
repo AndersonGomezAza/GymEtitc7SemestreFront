@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -17,6 +17,7 @@ import { MatSortModule } from '@angular/material/sort';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatCardModule } from '@angular/material/card';
 import { MatMenuModule } from '@angular/material/menu';
+import { MAT_DIALOG_DEFAULT_OPTIONS, MatDialogModule } from '@angular/material/dialog';
 import { HttpClientModule } from '@angular/common/http';
 import { MatTreeModule } from '@angular/material/tree';
 import { ActividadesComponent } from './components/actividades/actividades.component';
@@ -41,13 +42,12 @@ import { FormRutinasComponent } from './components/forms/form-rutinas/form-rutin
 import { FormValoracionesComponent } from './components/forms/form-valoraciones/form-valoraciones.component';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
-
+import { CommonModule } from '@angular/common';
 
 @NgModule({
   declarations: [
     AppComponent,
     MenuComponent,
-    ActividadesComponent,
     ImplementosComponent,
     MaquinariasComponent,
     PlanesComponent,
@@ -68,6 +68,8 @@ import { MatNativeDateModule } from '@angular/material/core';
     AppRoutingModule,
     BrowserAnimationsModule,
     MatToolbarModule,
+    CommonModule,
+    MatDialogModule,
     MatButtonModule,
     MatSidenavModule,
     MatIconModule,
@@ -91,7 +93,10 @@ import { MatNativeDateModule } from '@angular/material/core';
     MatInputModule,
     MatNativeDateModule,
   ],
-  providers: [],
+  schemas: [ CUSTOM_ELEMENTS_SCHEMA ],
+  providers: [
+    {provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: {hasBackdrop: false}}
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

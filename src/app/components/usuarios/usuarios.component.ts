@@ -20,7 +20,7 @@ export class UsuariosComponent implements OnInit {
     numDocumento:'Numero Documento',
     nombres: 'Nombre',
     apellidos: 'Apellido',
-    descripcionPlan: 'descripcion Plan',
+    descripcionPlan: 'Descripcion Plan',
     acciones: 'Acciones',
     planId: 'Id Plan'
   };
