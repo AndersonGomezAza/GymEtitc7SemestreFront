@@ -32,9 +32,20 @@
           </mat-form-field>
         </div>
       </div>
+      <div class="row">
+        <div class="col">
+          <mat-form-field class="full-width">
+            <input matInput placeholder="Serial" formControlName="Serial">
+            <mat-error *ngIf="implementsForm.controls['Serial'].hasError('required')">
+              El serial del implemento es <strong>Requerido</strong>
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </div>
     </mat-card-content>
     <mat-card-actions>
       <button mat-raised-button color="primary" type="submit">Crear</button>
+      <button mat-button mat-dialog-close>Cancel</button>
     </mat-card-actions>
   </mat-card>
 </form>

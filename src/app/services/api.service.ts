@@ -33,10 +33,15 @@ export class ApiService {
   }
 
   public async delete (gatewayController: string , idBody:  string){
-    return await this.api.delete(this.apiUrl+gatewayController+'/'+idBody);
+    console.log(this.apiUrl+gatewayController+'/'+idBody);
+    return await this.api.delete(this.apiUrl+gatewayController+'/'+idBody).subscribe(res =>{
+      console.log(res);
+    });
   }
 
   public async update ( gatewayController: string , body: any, idBody:  string ){
-    return await this.api.put(this.apiUrl+gatewayController+'/'+idBody, body);
+    return await this.api.put(this.apiUrl+gatewayController+'/'+idBody, body).subscribe(res =>{
+      console.log(res);
+    });
   }
 }

@@ -61,4 +61,8 @@ export class ActividadesComponent implements OnInit, AfterViewInit {
       width: '60%',
     });
   }
+
+  removeActivity(actividad) {
+    this.apiService.delete('Actividades', actividad.idActividad).then(res=>{console.log(res);})
+  }
 }

@@ -3,6 +3,8 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { ApiService } from 'src/app/services/api.service';
+import { FormImplementosComponent } from '../forms/form-implementos/form-implementos.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-implementos',
@@ -11,7 +13,7 @@ import { ApiService } from 'src/app/services/api.service';
 })
 export class ImplementosComponent implements OnInit, AfterViewInit{
 
-  displayedColumns: string[] = ['nombreImplemento', 'descripcionImplemento', 'categoriaImplemento', 'acciones'];
+  displayedColumns: string[] = ['nombreImplemento', 'descripcionImplemento', 'categoriaImplemento', 'serialImplemento', 'acciones'];
   dataSource: MatTableDataSource<any>;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
@@ -20,10 +22,11 @@ export class ImplementosComponent implements OnInit, AfterViewInit{
     nombreImplemento: 'Nombre',
     descripcionImplemento: 'Descripcion',
     categoriaImplemento: 'Categoria',
+    serialImplemento: 'Serial',
     acciones: 'Acciones',
   };
 
-  constructor(public apiService: ApiService) {
+  constructor(public apiService: ApiService, public dialog: MatDialog) {
     this.dataSource = new MatTableDataSource()
   }
 
@@ -45,5 +48,15 @@ export class ImplementosComponent implements OnInit, AfterViewInit{
     if (this.dataSource.paginator) {
       this.dataSource.paginator.firstPage();
     }
+  }
+
+  openDialog() {
+    this.dialog.open(FormImplementosComponent, {
+      width: '60%',
+    });
+  }
+
+  removeImplement(implement) {
+    this.apiService.delete('Implementos', implement.idImplemento).then(res=>{console.log(res);})
   }
 }
