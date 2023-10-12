@@ -5,6 +5,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { actividadesModel } from 'src/app/models/actividadesModel';
 import { ApiService } from 'src/app/services/api.service';
 import Swal from 'sweetalert2';
+import { ActividadesComponent } from '../../actividades/actividades.component';
 
 
 @Component({
@@ -20,9 +21,7 @@ export class FormActividadesComponent {
     Categoria: [null, [Validators.required, Validators.maxLength(20)]]
   });
 
-  constructor(public dialog: MatDialog, public apiService: ApiService){
-
-  }
+  constructor(public dialog: MatDialog, public apiService: ApiService){}
 
   infoActividades: actividadesModel ={
     DescripcionActividad: "",

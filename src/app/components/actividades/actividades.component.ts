@@ -37,9 +37,9 @@ export class ActividadesComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit(): void {
-    this.apiService.Get("Actividades").then((res)=>{
-      this.dataSource.data = res;
-    });
+    this.apiService.Get('Actividades').then(res=>{
+      return this.dataSource.data = res;
+    })
   }
 
   ngAfterViewInit() {
@@ -62,7 +62,12 @@ export class ActividadesComponent implements OnInit, AfterViewInit {
     });
   }
 
+  getActivities(){
+    this.ngOnInit();
+  }
+
   removeActivity(actividad) {
-    this.apiService.delete('Actividades', actividad.idActividad).then(res=>{console.log(res);})
+    this.apiService.delete('Actividades', actividad.idActividad).then(res=>{console.log(res)});
+    this.ngOnInit();
   }
 }
