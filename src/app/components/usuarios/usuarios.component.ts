@@ -4,6 +4,9 @@ import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { ApiService } from 'src/app/services/api.service';
 
+import { MatDialog } from '@angular/material/dialog';
+import { FormUsuariosComponent } from '../forms/form-usuarios/form-usuarios.component';
+
 @Component({
   selector: 'app-usuarios',
   templateUrl: './usuarios.component.html',
@@ -25,7 +28,7 @@ export class UsuariosComponent implements OnInit {
     planId: 'Id Plan'
   };
 
-  constructor(public apiService: ApiService) {
+  constructor(public apiService: ApiService, public dialog:MatDialog) {
     this.dataSource = new MatTableDataSource()
   }
 
@@ -48,4 +51,14 @@ export class UsuariosComponent implements OnInit {
       this.dataSource.paginator.firstPage();
     }
   }
+  openDialog() {
+    this.dialog.open(FormUsuariosComponent, {
+      width: '60%',
+    });
+  }
+
+  removeUsuario(usuario) {
+    this.apiService.delete('Usuarios', usuario.idUsuario).then(res=>{this.ngOnInit()});
+  }
 }
+

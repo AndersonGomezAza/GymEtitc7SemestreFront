@@ -1,8 +1,10 @@
-import { AfterContentInit, AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { ApiService } from 'src/app/services/api.service';
+import { FormRutinasComponent } from '../forms/form-rutinas/form-rutinas.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-rutinas',
@@ -11,21 +13,22 @@ import { ApiService } from 'src/app/services/api.service';
 })
 export class RutinasComponent implements OnInit, AfterViewInit {
 
-  displayedColumns: string[] = ['nombreRutina', 'caloriasRutina', 'descripcionRutina', 'categoriaRutina', 'tiempoRutinaMin', 'acciones'];
+  displayedColumns: string[] = ['NombreRutina', 'CaloriasRutina', 'DescripcionRutina', 'CategoriaRutina', 'TiempoRutinaMin', 'acciones'];
   dataSource: MatTableDataSource<any>;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
   columnHeaders = {
-    nombreRutina: 'Nombre',
-    caloriasRutina: 'Calorias',
-    descripcionRutina: 'Descripcion',
-    categoriaRutina: 'Categoria',
-    tiempoRutinaMin: 'Tiempo',
+    NombreRutina: 'Nombre',
+    CaloriasRutina: 'Calorias',
+    DescripcionRutina: 'Descripcion',
+    CategoriaRutina: 'Categoria',
+    TiempoRutinaMin: 'Tiempo',
     acciones: 'Acciones',
   };
 
-  constructor(public apiService: ApiService) {
+
+  constructor(public apiService: ApiService, public dialog:MatDialog) {
     this.dataSource = new MatTableDataSource()
   }
 
@@ -48,4 +51,15 @@ export class RutinasComponent implements OnInit, AfterViewInit {
       this.dataSource.paginator.firstPage();
     }
   }
+
+  openDialog() {
+    this.dialog.open(FormRutinasComponent, {
+      width: '60%',
+    });
+  }
+
+  removeRutina(rutina) {
+    this.apiService.delete('Rutinas', rutina.idRutina).then(res=>{this.ngOnInit()});
+  }
 }
+

@@ -7,17 +7,17 @@
       <div class="row">
         <div class="col">
           <mat-form-field class="full-width">
-            <input matInput placeholder="Calorias" formControlName="Calorias">
-            <mat-error *ngIf="rutinasForm.controls['Calorias'].hasError('required')">
-              La cantidad de calorias es <strong>Requerida</strong>
+            <input matInput placeholder="Nombre" formControlName="Nombre">
+            <mat-error *ngIf="rutinasForm.controls['Nombre'].hasError('required')">
+              El nombre de la actividad es <strong>Requerida</strong>
             </mat-error>
           </mat-form-field>
         </div>
         <div class="col">
           <mat-form-field class="full-width">
-            <input matInput placeholder="Nombre" formControlName="Nombre">
-            <mat-error *ngIf="rutinasForm.controls['Nombre'].hasError('required')">
-              El nombre de la actividad es <strong>Requerida</strong>
+            <input matInput placeholder="Calorias" formControlName="Calorias">
+            <mat-error *ngIf="rutinasForm.controls['Calorias'].hasError('required')">
+              La cantidad de calorias es <strong>Requerida</strong>
             </mat-error>
           </mat-form-field>
         </div>
@@ -53,6 +53,7 @@
     </mat-card-content>
     <mat-card-actions>
       <button mat-raised-button color="primary" type="submit">Crear</button>
+      <button mat-button mat-dialog-close>Cancel</button>
     </mat-card-actions>
   </mat-card>
 </form>
