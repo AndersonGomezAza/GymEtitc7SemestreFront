@@ -1,8 +1,10 @@
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { ApiService } from 'src/app/services/api.service';
+import { FormPlanesComponent } from '../forms/form-planes/form-planes.component';
 
 @Component({
   selector: 'app-planes',
@@ -23,7 +25,7 @@ export class PlanesComponent implements OnInit, AfterViewInit {
     acciones: 'Acciones',
   };
 
-  constructor(public apiService: ApiService) {
+  constructor(public apiService: ApiService, public dialog: MatDialog) {
     this.dataSource = new MatTableDataSource()
   }
 
@@ -45,5 +47,15 @@ export class PlanesComponent implements OnInit, AfterViewInit {
     if (this.dataSource.paginator) {
       this.dataSource.paginator.firstPage();
     }
+  }
+
+  openDialog() {
+    this.dialog.open(FormPlanesComponent, {
+      width: '60%',
+    });
+  }
+
+  removePlan(plan) {
+    this.apiService.delete('Planes', plan.idPlan).then(res=>{this.ngOnInit()});
   }
 }
