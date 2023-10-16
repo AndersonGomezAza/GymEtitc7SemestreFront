@@ -1,9 +1,12 @@
-<app-form-rutinas></app-form-rutinas>
 <div class="search-table">
   <mat-form-field>
     <mat-label>Busqueda</mat-label>
     <input matInput (keyup)="applyFilter($event)" placeholder="Ex. Mia" #input>
   </mat-form-field>
+</div>
+
+<div class="registrar">
+  <button mat-button (click)="openDialog()" class="btn-create">Crear Rutina</button>
 </div>
 
 <div class="mat-elevation-z8 table-component">

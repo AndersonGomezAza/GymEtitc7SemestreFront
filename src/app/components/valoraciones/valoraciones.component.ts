@@ -3,6 +3,8 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { ApiService } from 'src/app/services/api.service';
+import { MatDialog } from '@angular/material/dialog';
+import { FormValoracionesComponent } from '../forms/form-valoraciones/form-valoraciones.component';
 
 @Component({
   selector: 'app-valoraciones',
@@ -11,22 +13,21 @@ import { ApiService } from 'src/app/services/api.service';
 })
 export class ValoracionesComponent implements OnInit{
 
-  displayedColumns: string[] = ['fechaValoracion', 'categoriaValoracion', 'descripcionValoracion', 'nombres', 'apellidos', 'acciones'];
+  displayedColumns: string[] = ['FechaValoracion', 'CategoriaValoracion', 'DescricpcinValoracion', 'RecomendacionValoracion', 'acciones'];
   dataSource: MatTableDataSource<any>;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
   columnHeaders = {
     idValoracion:'Id Valoracion',
-    fechaValoracion: 'Fecha de Valoración',
-    categoriaValoracion: 'Categoria',
-    descripcionValoracion: 'Descripción',
-    nombres: 'Nombres Cliente',
-    apellidos: 'Apellidos Cliente',
+    FechaValoracion: 'Fecha de Valoración',
+    CategoriaValoracion: 'Categoria',
+    DescricpcinValoracion: 'Descripción',
+    RecomendacionValoracion: 'Nombres Cliente',
     acciones: 'Acciones',
   };
 
-  constructor(public apiService: ApiService) {
+  constructor(public apiService: ApiService, public dialog:MatDialog) {
     this.dataSource = new MatTableDataSource()
   }
 
@@ -48,5 +49,13 @@ export class ValoracionesComponent implements OnInit{
     if (this.dataSource.paginator) {
       this.dataSource.paginator.firstPage();
     }
+  }
+  openDialog() {
+    this.dialog.open(FormValoracionesComponent, {
+      width: '60%',
+    });
+  }
+  removeValoracion(valoracion) {
+    this.apiService.delete('Valoracion', valoracion.idValoracion).then(res=>{this.ngOnInit()});
   }
 }
