@@ -17,7 +17,7 @@
       <div class="row">
         <div class="col">
           <mat-form-field class="full-width">
-            <input matInput type="number" placeholder="Duracion Minutos" formControlName="Duracion">
+            <input matInput type="number" placeholder="Duracion Meses" formControlName="Duracion">
             <mat-error *ngIf="planesForm.controls['Duracion'].hasError('required')">
               La duracion en meses del plan es <strong>Requerido</strong>
             </mat-error>
@@ -44,6 +44,7 @@
     </mat-card-content>
     <mat-card-actions>
       <button mat-raised-button color="primary" type="submit">Crear</button>
+      <button mat-button mat-dialog-close>Cancel</button>
     </mat-card-actions>
   </mat-card>
 </form>
