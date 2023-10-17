@@ -1,4 +1,4 @@
-<form [formGroup]="valoracionesForm" novalidate (ngSubmit)="onSubmit()">
+<form [formGroup]="valoracionesForm" novalidate (ngSubmit)="onSubmit()" class="form-components">
   <mat-card class="shipping-card">
     <mat-card-header>
       <mat-card-title>Registrar Valoraciones</mat-card-title>
@@ -7,19 +7,20 @@
       <div class="row">
         <div class="col">
           <mat-form-field class="full-width">
-            <input matInput [matDatepicker]="picker" placeholder="Fecha" formControlName="Fecha">
-            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-            <mat-datepicker #picker></mat-datepicker>
-            <mat-error *ngIf="valoracionesForm.controls['Fecha'].hasError('required')">
-              La fecha es <strong>Requerida</strong>
-            </mat-error>
-          </mat-form-field> 
-        </div>      
-        <div class="col">
-          <mat-form-field class="full-width">
-            <input matInput placeholder="Categoria" formControlName="Categoria">
-            <mat-error *ngIf="valoracionesForm.controls['Categoria'].hasError('required')">
+            <input matInput placeholder="Categoria" formControlName="CategoriaValoracion">
+            <mat-error *ngIf="valoracionesForm.controls['CategoriaValoracion'].hasError('required')">
               La categoria de la actividad es <strong>Requerida</strong>
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div class="col">
+          <mat-form-field>
+            <mat-label>Numero de documento usuario</mat-label>
+            <mat-select formControlName="numDocumentoUsuario">
+              <mat-option *ngFor="let usuario of usuarios" [value]="usuario.numDocumento">{{ usuario.numDocumento }}</mat-option>
+            </mat-select>
+            <mat-error *ngIf="valoracionesForm.controls['numDocumentoUsuario'].hasError('required')">
+              Selecciona un <strong>Tipo de plan</strong>
             </mat-error>
           </mat-form-field>
         </div>
@@ -27,9 +28,9 @@
         <div class="row">
           <div class="col">
             <mat-form-field class="full-width">
-              <input matInput placeholder="Descripcion" formControlName="Descripcion">
-              <mat-error *ngIf="valoracionesForm.controls['Descripcion'].hasError('required')">
-                La descricpción de la actividad es <strong>Requerida</strong>
+              <input matInput placeholder="Descripcion" formControlName="DescripcionValoracion">
+              <mat-error *ngIf="valoracionesForm.controls['DescripcionValoracion'].hasError('required')">
+                La descripción de la actividad es <strong>Requerida</strong>
               </mat-error>
             </mat-form-field>
           </div>
@@ -37,17 +38,9 @@
         <div class="row">
           <div class="col">
             <mat-form-field class="full-width">
-              <input matInput placeholder="Nombres" formControlName="Nombres">
-              <mat-error *ngIf="valoracionesForm.controls['Nombres'].hasError('required')">
-                Los nombres para las valoraciones son <strong>Requeridos</strong>
-              </mat-error>
-            </mat-form-field>
-          </div>
-          <div class="col">
-            <mat-form-field class="full-width">
-              <input matInput placeholder="Apellidos" formControlName="Apellidos">
-              <mat-error *ngIf="valoracionesForm.controls['Apellidos'].hasError('required')">
-                Los apellidos para las valoraciones son <strong>Requeridos</strong>
+              <input matInput placeholder="Recomendacion" formControlName="RecomendacionValoracion">
+              <mat-error *ngIf="valoracionesForm.controls['RecomendacionValoracion'].hasError('maxLength')">
+                La recomendacion no debe ser mas de 300 caracteres
               </mat-error>
             </mat-form-field>
           </div>

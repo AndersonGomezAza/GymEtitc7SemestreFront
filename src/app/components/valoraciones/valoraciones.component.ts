@@ -13,17 +13,17 @@ import { FormValoracionesComponent } from '../forms/form-valoraciones/form-valor
 })
 export class ValoracionesComponent implements OnInit{
 
-  displayedColumns: string[] = ['FechaValoracion', 'CategoriaValoracion', 'DescricpcinValoracion', 'RecomendacionValoracion', 'acciones'];
+  displayedColumns: string[] = ['fechaValoracion', 'categoriaValoracion', 'descripcionValoracion', 'nombres', 'apellidos', 'acciones'];
   dataSource: MatTableDataSource<any>;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
   columnHeaders = {
-    idValoracion:'Id Valoracion',
-    FechaValoracion: 'Fecha de Valoración',
-    CategoriaValoracion: 'Categoria',
-    DescricpcinValoracion: 'Descripción',
-    RecomendacionValoracion: 'Nombres Cliente',
+    fechaValoracion: 'Fecha de Valoración',
+    categoriaValoracion: 'Categoria',
+    descripcionValoracion: 'Descripción',
+    nombres: 'Nombre',
+    apellidos: 'Apellido',
     acciones: 'Acciones',
   };
 

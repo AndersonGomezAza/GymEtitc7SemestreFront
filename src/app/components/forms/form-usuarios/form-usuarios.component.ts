@@ -2,11 +2,10 @@ import { Component, inject, OnInit } from '@angular/core';
 
 
 import { FormBuilder, Validators } from '@angular/forms';
-import { usuariosModel } from 'src/app/Models/usuariosModel';
+import { usuariosModel } from 'src/app/models/usuariosModel';
 import { MatDialog } from '@angular/material/dialog';
 import { ApiService } from 'src/app/services/api.service';
 import Swal from 'sweetalert2';
-import { planesModel } from 'src/app/models/planesModel';
 
 
 @Component({

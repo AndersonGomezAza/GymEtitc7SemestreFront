@@ -14,18 +14,18 @@ import { FormUsuariosComponent } from '../forms/form-usuarios/form-usuarios.comp
 })
 export class UsuariosComponent implements OnInit {
 
-  displayedColumns: string[] = ['numDocumento', 'nombres', 'apellidos', 'descripcionPlan', 'planId', 'acciones'];
+  displayedColumns: string[] = ['tipoDoc', 'numDocumento', 'nombres', 'apellidos', 'descripcionPlan', 'acciones'];
   dataSource: MatTableDataSource<any>;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
   columnHeaders = {
+    tipoDoc: 'Tipo Documento',
     numDocumento:'Numero Documento',
     nombres: 'Nombre',
     apellidos: 'Apellido',
     descripcionPlan: 'Descripcion Plan',
     acciones: 'Acciones',
-    planId: 'Id Plan'
   };
 
   constructor(public apiService: ApiService, public dialog:MatDialog) {

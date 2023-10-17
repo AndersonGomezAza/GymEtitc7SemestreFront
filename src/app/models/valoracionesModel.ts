@@ -1,8 +1,7 @@
 export class valoracionesModels {
-    FechaValoracion: Date;
+    FechaValoracion: string;
     CategoriaValoracion: string;
-    DescricpcinValoracion: string;
-    RecomendacionValoracion: string; 
-    NumDocumento: number;
-
+    DescripcionValoracion: string;
+    RecomendacionValoracion: string;
+    idUsuario: number;
 }
