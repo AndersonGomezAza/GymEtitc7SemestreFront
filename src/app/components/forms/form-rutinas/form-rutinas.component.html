@@ -15,9 +15,12 @@
         </div>
         <div class="col">
           <mat-form-field class="full-width">
-            <input matInput placeholder="Calorias" formControlName="Calorias">
+            <input matInput type="number" placeholder="Calorias" formControlName="Calorias">
             <mat-error *ngIf="rutinasForm.controls['Calorias'].hasError('required')">
               La cantidad de calorias es <strong>Requerida</strong>
+            </mat-error>
+            <mat-error *ngIf="rutinasForm.controls['Calorias'].hasError('max')">
+              calorias maximas 500 por rutina
             </mat-error>
           </mat-form-field>
         </div>
@@ -43,9 +46,12 @@
       <div class="row">
         <div class="col">
           <mat-form-field class="full-width">
-            <input matInput type="number" placeholder="Tiempo " formControlName="Tiempo">
+            <input matInput type="number" placeholder="Tiempo" formControlName="Tiempo">
             <mat-error *ngIf="rutinasForm.controls['Tiempo'].hasError('required')">
               La el tiempo de la rutina es <strong>Requerida</strong>
+            </mat-error>
+            <mat-error *ngIf="rutinasForm.controls['Tiempo'].hasError('max')">
+              valor maximo en tiempo 60 minutos
             </mat-error>
           </mat-form-field>
         </div>

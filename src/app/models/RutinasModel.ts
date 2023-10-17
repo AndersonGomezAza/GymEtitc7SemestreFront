@@ -1,4 +1,4 @@
-export class RutinasModels{
+export class RutinasModel{
     CaloriasRutina: number;
     DescripcionRutina: string;
     NombreRutina: string;
