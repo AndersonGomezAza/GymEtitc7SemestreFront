@@ -5,6 +5,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { ApiService } from 'src/app/services/api.service';
 import { FormImplementosComponent } from '../forms/form-implementos/form-implementos.component';
 import { MatDialog } from '@angular/material/dialog';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-implementos',
@@ -57,6 +58,23 @@ export class ImplementosComponent implements OnInit, AfterViewInit{
   }
 
   removeImplement(implement) {
-    this.apiService.delete('Implementos', implement.idImplemento).then(res=>{console.log(res);})
+    Swal.fire({
+      title: 'Esta Seguro que desea eliminar el registro?',
+      text: "Esta acción no se puede revertir",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Eliminar'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.apiService.delete('Implementos', implement.idImplemento).then(res=>{this.ngOnInit})
+        Swal.fire(
+          'Registro Eliminado',
+          'El registro ha sido eliminado',
+          'success'
+        )
+      }
+    })
   }
 }

@@ -61,7 +61,7 @@ import { CommonModule } from '@angular/common';
     FormMaquinariasComponent,
     FormPlanesComponent,
     FormRutinasComponent,
-    FormValoracionesComponent, 
+    FormValoracionesComponent,
   ],
   imports: [
     BrowserModule,

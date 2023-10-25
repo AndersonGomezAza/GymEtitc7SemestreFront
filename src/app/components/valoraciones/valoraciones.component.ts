@@ -5,6 +5,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { ApiService } from 'src/app/services/api.service';
 import { MatDialog } from '@angular/material/dialog';
 import { FormValoracionesComponent } from '../forms/form-valoraciones/form-valoraciones.component';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-valoraciones',
@@ -56,6 +57,23 @@ export class ValoracionesComponent implements OnInit{
     });
   }
   removeValoracion(valoracion) {
-    this.apiService.delete('Valoracion', valoracion.idValoracion).then(res=>{this.ngOnInit()});
+    Swal.fire({
+      title: 'Esta Seguro que desea eliminar el registro?',
+      text: "Esta acción no se puede revertir",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Eliminar'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.apiService.delete('Valoracion', valoracion.idValoracion).then(res=>{this.ngOnInit()});
+        Swal.fire(
+          'Registro Eliminado',
+          'El registro ha sido eliminado',
+          'success'
+        )
+      }
+    })
   }
 }

@@ -5,6 +5,7 @@ import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { ApiService } from 'src/app/services/api.service';
 import { FormPlanesComponent } from '../forms/form-planes/form-planes.component';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-planes',
@@ -13,7 +14,7 @@ import { FormPlanesComponent } from '../forms/form-planes/form-planes.component'
 })
 export class PlanesComponent implements OnInit, AfterViewInit {
 
-  displayedColumns: string[] = ['descripcionPlan', 'duracionMesesPlan', 'valorPlan', 'acciones'];
+  displayedColumns: string[] = ['descripcionPlan', 'duracionMesesPlan', 'precioFormateado', 'acciones'];
   dataSource: MatTableDataSource<any>;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
@@ -21,7 +22,7 @@ export class PlanesComponent implements OnInit, AfterViewInit {
   columnHeaders = {
     descripcionPlan: 'Descripcion',
     duracionMesesPlan: 'Duracion Meses',
-    valorPlan: 'Precio',
+    precioFormateado: 'Precio',
     acciones: 'Acciones',
   };
 
@@ -29,10 +30,21 @@ export class PlanesComponent implements OnInit, AfterViewInit {
     this.dataSource = new MatTableDataSource()
   }
 
+
   ngOnInit(): void {
-    this.apiService.Get("Planes").then((res)=>{
-      this.dataSource.data = res;
-    });
+    this.apiService.Get('Planes').then(res=>{
+      this.dataSource.data = res.map(item => {
+        item.precioFormateado = this.formatoPrecioColombiano(item.valorPlan);
+        return item;
+      })
+    })
+  }
+
+  formatoPrecioColombiano(precio: number): string {
+    return new Intl.NumberFormat('es-CO', {
+      style: 'currency',
+      currency: 'COP'
+    }).format(precio);
   }
 
   ngAfterViewInit() {
@@ -56,6 +68,23 @@ export class PlanesComponent implements OnInit, AfterViewInit {
   }
 
   removePlan(plan) {
-    this.apiService.delete('Planes', plan.idPlan).then(res=>{this.ngOnInit()});
+    Swal.fire({
+      title: 'Esta Seguro que desea eliminar el registro?',
+      text: "Esta acción no se puede revertir",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Eliminar'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.apiService.delete('Planes', plan.idPlan).then(res=>{this.ngOnInit()});
+        Swal.fire(
+          'Registro Eliminado',
+          'El registro ha sido eliminado',
+          'success'
+        )
+      }
+    })
   }
 }

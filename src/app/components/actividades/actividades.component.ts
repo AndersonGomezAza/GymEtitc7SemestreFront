@@ -9,6 +9,7 @@ import { CommonModule } from '@angular/common';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { FormActividadesComponent } from '../forms/form-actividades/form-actividades.component';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-actividades',
@@ -67,7 +68,23 @@ export class ActividadesComponent implements OnInit, AfterViewInit {
   }
 
   removeActivity(actividad) {
-    this.apiService.delete('Actividades', actividad.idActividad).then(res=>{console.log(res)});
-    this.ngOnInit();
+    Swal.fire({
+      title: 'Esta Seguro que desea eliminar el registro?',
+      text: "Esta acción no se puede revertir",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Eliminar'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.apiService.delete('Actividades', actividad.idActividad).then(res=>{this.ngOnInit()});
+        Swal.fire(
+          'Registro Eliminado',
+          'El registro ha sido eliminado',
+          'success'
+        )
+      }
+    })
   }
 }

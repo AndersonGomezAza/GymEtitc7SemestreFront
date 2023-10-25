@@ -5,6 +5,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { ApiService } from 'src/app/services/api.service';
 import { FormRutinasComponent } from '../forms/form-rutinas/form-rutinas.component';
 import { MatDialog } from '@angular/material/dialog';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-rutinas',
@@ -59,7 +60,24 @@ export class RutinasComponent implements OnInit, AfterViewInit {
   }
 
   removeRutina(rutina) {
-    this.apiService.delete('Rutinas', rutina.idRutina).then(res=>{this.ngOnInit()});
+    Swal.fire({
+      title: 'Esta Seguro que desea eliminar el registro?',
+      text: "Esta acción no se puede revertir",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Eliminar'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.apiService.delete('Rutinas', rutina.idRutina).then(res=>{this.ngOnInit()});
+        Swal.fire(
+          'Registro Eliminado',
+          'El registro ha sido eliminado',
+          'success'
+        )
+      }
+    })
   }
 }
 
