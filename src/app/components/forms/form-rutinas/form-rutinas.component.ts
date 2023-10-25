@@ -2,7 +2,7 @@ import { Component, inject } from '@angular/core';
 
 import { FormBuilder, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
-import { RutinasModels } from 'src/app/Models/RutinasModels';
+import { RutinasModel } from 'src/app/models/RutinasModel';
 import { ApiService } from 'src/app/services/api.service';
 import Swal from 'sweetalert2';
 
@@ -18,14 +18,14 @@ export class FormRutinasComponent {
   constructor(public dialog:MatDialog, public apiService: ApiService){}
 
   rutinasForm = this.fb.group({
-    Calorias: [null, [Validators.required, Validators.max(60)]],
-    Descripcion: [null, [Validators.required, Validators.maxLength(50)]],
+    Calorias: [null, [Validators.required, Validators.max(500)]],
+    Descripcion: [null, [Validators.required]],
     Nombre: [null, [Validators.required, Validators.maxLength(40)]],
     Categoria: [null, [Validators.required, Validators.maxLength(500)]],
-    Tiempo: [null, [Validators.required, Validators.max(40)]]
+    Tiempo: [null, [Validators.required, Validators.max(60)]]
   });
 
-  infoRutinas: RutinasModels = {
+  infoRutinas: RutinasModel = {
     CaloriasRutina: 0,
     DescripcionRutina:"",
     NombreRutina:"",
@@ -36,14 +36,14 @@ export class FormRutinasComponent {
 
   onSubmit(): void {
     if (this.rutinasForm.valid) {
-      this.infoRutinas.CategoriaRutina = this.rutinasForm.controls['Calorias'].value;
+      this.infoRutinas.CaloriasRutina = this.rutinasForm.controls['Calorias'].value;
       this.infoRutinas.DescripcionRutina = this.rutinasForm.controls['Descripcion'].value;
       this.infoRutinas.NombreRutina = this.rutinasForm.controls['Nombre'].value;
       this.infoRutinas.CategoriaRutina = this.rutinasForm.controls['Categoria'].value;
-      this.infoRutinas.TiempoRutinaMin = this.rutinasForm.controls['Serial'].value;
+      this.infoRutinas.TiempoRutinaMin = this.rutinasForm.controls['Tiempo'].value;
 
       this.dialog.closeAll();
-      this.apiService.post('Maquinarias', this.infoRutinas).then(res=>{
+      this.apiService.post('Rutinas', this.infoRutinas).then(res=>{
         if (res == undefined) {
           Swal.fire({
             title: 'Creacion Realizada',

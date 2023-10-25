@@ -7,23 +7,16 @@
       <div class="row">
         <div class="col">
           <mat-form-field class="full-width">
-            <input matInput placeholder="Nombre" formControlName="Nombre">
-            <mat-error *ngIf="usuariosForm.controls['Nombre'].hasError('required')">
+            <input matInput placeholder="Nombres" formControlName="Nombres">
+            <mat-error *ngIf="usuariosForm.controls['Nombres'].hasError('required')">
               El nombre es <strong>Requerido</strong>
             </mat-error>
           </mat-form-field>
         </div>
         <div class="col">
           <mat-form-field class="full-width">
-            <input matInput type="number" placeholder="Plan Id" formControlName="PlanId">
-          </mat-form-field>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col">
-          <mat-form-field class="full-width">
-            <input matInput placeholder="Apellido" formControlName="Apellido">
-            <mat-error *ngIf="usuariosForm.controls['Apellido'].hasError('required')">
+            <input matInput placeholder="Apellidos" formControlName="Apellidos">
+            <mat-error *ngIf="usuariosForm.controls['Apellidos'].hasError('required')">
               El apellido es <strong>Requerido</strong>
             </mat-error>
           </mat-form-field>
@@ -32,9 +25,40 @@
       <div class="row">
         <div class="col">
           <mat-form-field class="full-width">
-            <input matInput placeholder="Descripcion Plan" formControlName="Descripcion">
-            <mat-error *ngIf="usuariosForm.controls['Descripcion'].hasError('required')">
-              La descripción del plan es <strong>Requerida</strong>
+            <input matInput placeholder="Rol usuario" formControlName="Rol">
+            <mat-error *ngIf="usuariosForm.controls['Rol'].hasError('required')">
+              El rol del usuario es <strong>Requerido</strong>
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <mat-form-field class="full-width">
+            <input matInput placeholder="Tipo Documento" formControlName="TipoDoc">
+            <mat-error *ngIf="usuariosForm.controls['TipoDoc'].hasError('required')">
+              el tipo de documento es <strong>Requerido</strong>
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div class="col">
+          <mat-form-field class="full-width">
+            <input matInput placeholder="Numero Documento" formControlName="NumDocumento">
+            <mat-error *ngIf="usuariosForm.controls['NumDocumento'].hasError('required')">
+              el numero de documento es <strong>Requerido</strong>
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <mat-form-field>
+            <mat-label>Selecciona un plan</mat-label>
+            <mat-select formControlName="DescripcionPlan">
+              <mat-option *ngFor="let plan of planes" [value]="plan.descripcionPlan" >{{ plan.descripcionPlan }}</mat-option>
+            </mat-select>
+            <mat-error *ngIf="usuariosForm.controls['DescripcionPlan'].hasError('required')">
+              Selecciona un <strong>Tipo de plan</strong>
             </mat-error>
           </mat-form-field>
         </div>

@@ -6,6 +6,7 @@ import { ApiService } from 'src/app/services/api.service';
 
 import { MatDialog } from '@angular/material/dialog';
 import { FormUsuariosComponent } from '../forms/form-usuarios/form-usuarios.component';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-usuarios',
@@ -14,18 +15,18 @@ import { FormUsuariosComponent } from '../forms/form-usuarios/form-usuarios.comp
 })
 export class UsuariosComponent implements OnInit {
 
-  displayedColumns: string[] = ['numDocumento', 'nombres', 'apellidos', 'descripcionPlan', 'planId', 'acciones'];
+  displayedColumns: string[] = ['tipoDoc', 'numDocumento', 'nombres', 'apellidos', 'descripcionPlan', 'acciones'];
   dataSource: MatTableDataSource<any>;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
   columnHeaders = {
+    tipoDoc: 'Tipo Documento',
     numDocumento:'Numero Documento',
     nombres: 'Nombre',
     apellidos: 'Apellido',
     descripcionPlan: 'Descripcion Plan',
     acciones: 'Acciones',
-    planId: 'Id Plan'
   };
 
   constructor(public apiService: ApiService, public dialog:MatDialog) {
@@ -58,7 +59,24 @@ export class UsuariosComponent implements OnInit {
   }
 
   removeUsuario(usuario) {
-    this.apiService.delete('Usuarios', usuario.idUsuario).then(res=>{this.ngOnInit()});
+    Swal.fire({
+      title: 'Esta Seguro que desea eliminar el registro?',
+      text: "Esta acción no se puede revertir",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Eliminar'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.apiService.delete('Usuarios', usuario.idUsuario).then(res=>{this.ngOnInit()});
+        Swal.fire(
+          'Registro Eliminado',
+          'El registro ha sido eliminado',
+          'success'
+        )
+      }
+    })
   }
 }
 

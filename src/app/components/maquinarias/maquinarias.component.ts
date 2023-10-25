@@ -5,6 +5,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { ApiService } from 'src/app/services/api.service';
 import { FormMaquinariasComponent } from '../forms/form-maquinarias/form-maquinarias.component';
 import { MatDialog } from '@angular/material/dialog';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-maquinarias',
@@ -57,6 +58,23 @@ export class MaquinariasComponent implements OnInit, AfterViewInit{
   }
 
   removeMaquinaria(maquinaria) {
-    this.apiService.delete('Maquinarias', maquinaria.idMaquinaria).then(res=>{this.ngOnInit()});
+    Swal.fire({
+      title: 'Esta Seguro que desea eliminar el registro?',
+      text: "Esta acción no se puede revertir",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Eliminar'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.apiService.delete('Maquinarias', maquinaria.idMaquinaria).then(res=>{this.ngOnInit()});
+        Swal.fire(
+          'Registro Eliminado',
+          'El registro ha sido eliminado',
+          'success'
+        )
+      }
+    })
   }
 }

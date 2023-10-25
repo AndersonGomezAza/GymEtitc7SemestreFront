@@ -1,7 +1,7 @@
 <div class="search-table">
   <mat-form-field>
     <mat-label>Busqueda</mat-label>
-    <input matInput (keyup)="applyFilter($event)" placeholder="Ex. Mia" #input>
+    <input matInput (keyup)="applyFilter($event)" placeholder="Ej. Clase de yoga" #input>
   </mat-form-field>
 </div>
 
@@ -15,7 +15,7 @@
     <!-- Generar dinámicamente las columnas -->
     <ng-container *ngFor="let column of displayedColumns" [matColumnDef]="column">
       <div *ngIf="column!='acciones'">
-        <mat-header-cell *matHeaderCellDef> {{ columnHeaders[column] }} </mat-header-cell>
+        <mat-header-cell *matHeaderCellDef mat-sort-header> {{ columnHeaders[column] }} </mat-header-cell>
         <mat-cell *matCellDef="let element"> {{ element[column] }} </mat-cell>
       </div>
       <div *ngIf="column=='acciones'">

@@ -5,6 +5,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { ApiService } from 'src/app/services/api.service';
 import { MatDialog } from '@angular/material/dialog';
 import { FormValoracionesComponent } from '../forms/form-valoraciones/form-valoraciones.component';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-valoraciones',
@@ -13,17 +14,17 @@ import { FormValoracionesComponent } from '../forms/form-valoraciones/form-valor
 })
 export class ValoracionesComponent implements OnInit{
 
-  displayedColumns: string[] = ['FechaValoracion', 'CategoriaValoracion', 'DescricpcinValoracion', 'RecomendacionValoracion', 'acciones'];
+  displayedColumns: string[] = ['fechaValoracion', 'categoriaValoracion', 'descripcionValoracion', 'nombres', 'apellidos', 'acciones'];
   dataSource: MatTableDataSource<any>;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
   columnHeaders = {
-    idValoracion:'Id Valoracion',
-    FechaValoracion: 'Fecha de Valoración',
-    CategoriaValoracion: 'Categoria',
-    DescricpcinValoracion: 'Descripción',
-    RecomendacionValoracion: 'Nombres Cliente',
+    fechaValoracion: 'Fecha de Valoración',
+    categoriaValoracion: 'Categoria',
+    descripcionValoracion: 'Descripción',
+    nombres: 'Nombre',
+    apellidos: 'Apellido',
     acciones: 'Acciones',
   };
 
@@ -56,6 +57,23 @@ export class ValoracionesComponent implements OnInit{
     });
   }
   removeValoracion(valoracion) {
-    this.apiService.delete('Valoracion', valoracion.idValoracion).then(res=>{this.ngOnInit()});
+    Swal.fire({
+      title: 'Esta Seguro que desea eliminar el registro?',
+      text: "Esta acción no se puede revertir",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Eliminar'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.apiService.delete('Valoracion', valoracion.idValoracion).then(res=>{this.ngOnInit()});
+        Swal.fire(
+          'Registro Eliminado',
+          'El registro ha sido eliminado',
+          'success'
+        )
+      }
+    })
   }
 }

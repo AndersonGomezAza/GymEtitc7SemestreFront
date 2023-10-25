@@ -10,8 +10,8 @@ import { UsuariosComponent } from './components/usuarios/usuarios.component';
 import { ValoracionesComponent } from './components/valoraciones/valoraciones.component';
 
 const routes: Routes = [
-  { path: "", component:InicioComponent },
-  { path: "Inicio", component:InicioComponent },
+  { path: "", component:ActividadesComponent },
+  //{ path: "Inicio", component:InicioComponent },
   { path: "Actividades", component:ActividadesComponent },
   { path: "Implementos", component:ImplementosComponent },
   { path: "Maquinarias", component:MaquinariasComponent },
