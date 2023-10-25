@@ -48,6 +48,7 @@ export class PlanesComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit() {
+    this.paginator._intl.itemsPerPageLabel = "Elementos por pagina";
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
   }
