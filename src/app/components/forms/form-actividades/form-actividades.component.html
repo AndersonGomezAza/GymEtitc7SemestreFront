@@ -1,7 +1,7 @@
 <form [formGroup]="activitiesForm" novalidate (ngSubmit)="onSubmit()" class="form-components">
   <mat-card class="shipping-card">
     <mat-card-header>
-      <mat-card-title>Registrar Actividad</mat-card-title>
+      <mat-card-title>{{titulo}}</mat-card-title>
     </mat-card-header>
     <mat-card-content>
       <div class="row">
@@ -37,7 +37,7 @@
       </div>
     </mat-card-content>
     <mat-card-actions>
-      <button mat-raised-button color="primary" type="submit">Crear</button>
+      <button mat-raised-button color="primary" type="submit">{{acciones}}</button>
       <button mat-button mat-dialog-close>Cancel</button>
     </mat-card-actions>
   </mat-card>

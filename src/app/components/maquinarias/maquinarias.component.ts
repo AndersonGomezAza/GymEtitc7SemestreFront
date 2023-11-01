@@ -5,14 +5,16 @@ import { MatTableDataSource } from '@angular/material/table';
 import { ApiService } from 'src/app/services/api.service';
 import { FormMaquinariasComponent } from '../forms/form-maquinarias/form-maquinarias.component';
 import { MatDialog } from '@angular/material/dialog';
+import Swal from 'sweetalert2';
+import { ModalService } from 'src/app/modal/modal.service';
 
 @Component({
   selector: 'app-maquinarias',
   templateUrl: './maquinarias.component.html',
   styleUrls: ['./maquinarias.component.css']
 })
-export class MaquinariasComponent implements OnInit, AfterViewInit{
-  displayedColumns: string[] = [ 'nombreMaquinaria', 'descripcionMaquinaria', 'categoriaMaquinaria', 'estadoMaquinaria', 'serialMaquinaria', 'acciones'];
+export class MaquinariasComponent implements OnInit, AfterViewInit {
+  displayedColumns: string[] = ['nombreMaquinaria', 'descripcionMaquinaria', 'categoriaMaquinaria', 'estadoMaquinaria', 'serialMaquinaria', 'acciones'];
   dataSource: MatTableDataSource<any>;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
@@ -26,12 +28,15 @@ export class MaquinariasComponent implements OnInit, AfterViewInit{
     acciones: 'Acciones',
   };
 
-  constructor(public apiService: ApiService, public dialog:MatDialog) {
+  
+  accion: string = "Crear Maquinaria";
+
+  constructor(public apiService: ApiService, public dialog: MatDialog, public modalService: ModalService) {
     this.dataSource = new MatTableDataSource()
   }
 
   ngOnInit(): void {
-    this.apiService.Get("Maquinarias").then((res)=>{
+    this.apiService.Get("Maquinarias").then((res) => {
       this.dataSource.data = res;
     });
   }
@@ -41,13 +46,13 @@ export class MaquinariasComponent implements OnInit, AfterViewInit{
     this.dataSource.sort = this.sort;
   }
 
-  applyFilter(event: Event) {
-    const filterValue = (event.target as HTMLInputElement).value;
-    this.dataSource.filter = filterValue.trim().toLowerCase();
-
-    if (this.dataSource.paginator) {
-      this.dataSource.paginator.firstPage();
+  loadTable(data: any[]) {
+    this.displayedColumns = [];
+    for (let column in data[0]) {
+      this.displayedColumns.push(column);
     }
+    this.displayedColumns.push('acciones');
+
   }
 
   openDialog() {
@@ -56,7 +61,44 @@ export class MaquinariasComponent implements OnInit, AfterViewInit{
     });
   }
 
+  
+  editarMaquinaria(element: any) {
+    this.modalService.acciones.next("Editar Maquinaria");
+    this.accion = "Editar Maquinaria";
+  
+    this.dialog.open(FormMaquinariasComponent, {
+      height: 'auto',
+      width: 'auto',
+      data: element // El objeto 'element' ahora contiene los datos del dueño a editar
+    });
+  }
+
   removeMaquinaria(maquinaria) {
-    this.apiService.delete('Maquinarias', maquinaria.idMaquinaria).then(res=>{this.ngOnInit()});
+    Swal.fire({
+      title: '¿Estás seguro?',
+      text: 'Esta acción eliminará la maquinaria. No podrás deshacerla.',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Sí, eliminar',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.apiService.delete('Maquinarias', maquinaria.id).then((res) => {
+          this.ngOnInit();
+          Swal.fire('Maquinaria Eliminada', 'La maquinaria ha sido eliminada.', 'success');
+        });
+      }
+    });
+  }
+  
+
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+
+    if (this.dataSource.paginator) {
+      this.dataSource.paginator.firstPage();
+    }
   }
 }

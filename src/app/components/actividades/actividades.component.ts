@@ -9,6 +9,8 @@ import { CommonModule } from '@angular/common';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { FormActividadesComponent } from '../forms/form-actividades/form-actividades.component';
+import Swal from 'sweetalert2';
+import { ModalService } from 'src/app/modal/modal.service';
 
 @Component({
   selector: 'app-actividades',
@@ -32,7 +34,9 @@ export class ActividadesComponent implements OnInit, AfterViewInit {
     acciones: 'Acciones',
   };
 
-  constructor(public apiService: ApiService, public dialog: MatDialog) {
+  accion: string = "Crear Actividad";
+
+  constructor(public apiService: ApiService, public dialog: MatDialog, public modalService: ModalService) {
     this.dataSource = new MatTableDataSource()
   }
 
@@ -47,13 +51,13 @@ export class ActividadesComponent implements OnInit, AfterViewInit {
     this.dataSource.sort = this.sort;
   }
 
-  applyFilter(event: Event) {
-    const filterValue = (event.target as HTMLInputElement).value;
-    this.dataSource.filter = filterValue.trim().toLowerCase();
-
-    if (this.dataSource.paginator) {
-      this.dataSource.paginator.firstPage();
+  loadTable(data: any[]) {
+    this.displayedColumns = [];
+    for (let column in data[0]) {
+      this.displayedColumns.push(column);
     }
+    this.displayedColumns.push('acciones');
+
   }
 
   openDialog() {
@@ -62,12 +66,44 @@ export class ActividadesComponent implements OnInit, AfterViewInit {
     });
   }
 
-  getActivities(){
-    this.ngOnInit();
+  editarActividad(element: any) {
+    this.modalService.acciones.next("Editar Actividad");
+    this.accion = "Editar Actividad";  
+
+    this.dialog.open(FormActividadesComponent, {
+      height: 'auto',
+      width: 'auto',
+      data: element // El objeto 'element' ahora contiene los datos del dueño a editar
+    });
   }
 
-  removeActivity(actividad) {
-    this.apiService.delete('Actividades', actividad.idActividad).then(res=>{console.log(res)});
-    this.ngOnInit();
+  removeActividad(actividad) {
+    Swal.fire({
+      title: '¿Estás seguro?',
+      text: 'Esta acción eliminará la actividad. No podrás deshacerla.',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Sí, eliminar',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.apiService.delete('Actividades', actividad.id).then((res) => {
+          this.ngOnInit();
+          Swal.fire('Actividad Eliminada', 'La actividad ha sido eliminada.', 'success');
+        });
+      }
+    });
   }
+  
+
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+
+    if (this.dataSource.paginator) {
+      this.dataSource.paginator.firstPage();
+    }
+  }
+  
 }

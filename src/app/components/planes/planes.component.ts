@@ -5,6 +5,7 @@ import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { ApiService } from 'src/app/services/api.service';
 import { FormPlanesComponent } from '../forms/form-planes/form-planes.component';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-planes',
@@ -40,13 +41,13 @@ export class PlanesComponent implements OnInit, AfterViewInit {
     this.dataSource.sort = this.sort;
   }
 
-  applyFilter(event: Event) {
-    const filterValue = (event.target as HTMLInputElement).value;
-    this.dataSource.filter = filterValue.trim().toLowerCase();
-
-    if (this.dataSource.paginator) {
-      this.dataSource.paginator.firstPage();
+  loadTable(data: any[]) {
+    this.displayedColumns = [];
+    for (let column in data[0]) {
+      this.displayedColumns.push(column);
     }
+    this.displayedColumns.push('acciones');
+
   }
 
   openDialog() {
@@ -56,6 +57,31 @@ export class PlanesComponent implements OnInit, AfterViewInit {
   }
 
   removePlan(plan) {
-    this.apiService.delete('Planes', plan.idPlan).then(res=>{this.ngOnInit()});
+    Swal.fire({
+      title: '¿Estás seguro?',
+      text: 'Esta acción eliminará el plan. No podrás deshacerla.',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Sí, eliminar',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.apiService.delete('Planes', plan.id).then((res) => {
+          this.ngOnInit();
+          Swal.fire('Plan Eliminado', 'El plan ha sido eliminado.', 'success');
+        });
+      }
+    });
+  }
+  
+
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+
+    if (this.dataSource.paginator) {
+      this.dataSource.paginator.firstPage();
+    }
   }
 }

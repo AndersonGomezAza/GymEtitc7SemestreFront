@@ -1,10 +1,11 @@
-import { Component, inject } from '@angular/core';
-
+import { Component, Inject, inject } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
-import { MatDialog } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
 import { implementosModel } from 'src/app/models/implementosModel';
 import Swal from 'sweetalert2';
 import { ApiService } from '../../../services/api.service';
+import { ModalService } from 'src/app/modal/modal.service';
+import { MatTableDataSource } from '@angular/material/table';
 
 
 @Component({
@@ -17,11 +18,29 @@ export class FormImplementosComponent {
   implementsForm = this.fb.group({
     Nombre: [null, [Validators.required, Validators.maxLength(30)]],
     Descripcion: [null, [Validators.required, Validators.max(60)]],
-    Categoria: [null, [Validators.required, Validators.maxLength(20)]],
-    Serial: [null, [Validators.required, Validators.maxLength(20)]]
+    Categoria:   [null, [Validators.required, Validators.maxLength(20)]],
   });
+  dataSource: any;
 
-  constructor( public dialog: MatDialog, public apiService:ApiService){}
+  constructor(
+    public dialog: MatDialog,
+    public apiService:ApiService,
+    public modalService: ModalService,
+    @Inject(MAT_DIALOG_DATA) public data: any // Utiliza MAT_DIALOG_DATA para obtener los datos
+  ) {
+    this.dataSource = new MatTableDataSource();
+
+    if (data) {
+      this.implementsForm.setValue({
+        Nombre: data.nombreImplemento, 
+        Descripcion: data.descripcionImplemento, 
+        Categoria: data.categoriaImplemento, 
+      });
+      
+      this.titulo = this.modalService.titulo;
+      this.acciones = this.modalService.acciones.value;
+    }
+  }
 
   infoImplemetos: implementosModel = {
     NombreImplemento:"",
@@ -29,6 +48,9 @@ export class FormImplementosComponent {
     DescripcionImplemento:"",
     SerialImplemento:"",
   };
+
+  titulo=""
+  acciones=""
 
   onSubmit(): void {
     if (this.implementsForm.valid) {

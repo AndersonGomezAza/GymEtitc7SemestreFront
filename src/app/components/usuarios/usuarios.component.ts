@@ -6,6 +6,7 @@ import { ApiService } from 'src/app/services/api.service';
 
 import { MatDialog } from '@angular/material/dialog';
 import { FormUsuariosComponent } from '../forms/form-usuarios/form-usuarios.component';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-usuarios',
@@ -43,6 +44,40 @@ export class UsuariosComponent implements OnInit {
     this.dataSource.sort = this.sort;
   }
 
+  loadTable(data: any[]) {
+    this.displayedColumns = [];
+    for (let column in data[0]) {
+      this.displayedColumns.push(column);
+    }
+    this.displayedColumns.push('acciones');
+
+  }
+
+  openDialog() {
+    this.dialog.open(FormUsuariosComponent, {
+      width: '60%',
+    });
+  }
+
+  removeUsuario(usuario) {
+    Swal.fire({
+      title: '¿Estás seguro?',
+      text: 'Esta acción eliminará al usuario. No podrás deshacerla.',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Sí, eliminar',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.apiService.delete('Usuarios', usuario.id).then((res) => {
+          this.ngOnInit();
+          Swal.fire('Usuario Eliminado', 'El usuario ha sido eliminado.', 'success');
+        });
+      }
+    });
+  }
+
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
@@ -51,14 +86,4 @@ export class UsuariosComponent implements OnInit {
       this.dataSource.paginator.firstPage();
     }
   }
-  openDialog() {
-    this.dialog.open(FormUsuariosComponent, {
-      width: '60%',
-    });
-  }
-
-  removeUsuario(usuario) {
-    this.apiService.delete('Usuarios', usuario.idUsuario).then(res=>{this.ngOnInit()});
-  }
 }
-
