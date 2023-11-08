@@ -1,4 +1,4 @@
-import { Component, Inject, inject } from '@angular/core';
+import { Component, Inject, OnInit, inject } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
 import { ApiService } from 'src/app/services/api.service';
@@ -13,7 +13,7 @@ import { actividadesModel } from 'src/app/models/actividadesModel';
   styleUrls: ['./form-actividades.component.css']
 })
 
-export class FormActividadesComponent {
+export class FormActividadesComponent implements OnInit{
   private fb = inject(FormBuilder);
 
   constructor(
@@ -28,7 +28,8 @@ export class FormActividadesComponent {
         Duracion: data.duracionMinActividad,
         Categoria: data.categoriaActividad,
       });
-
+      console.log(data)
+      this.idData = data.idActividad;
       this.titulo = this.modalService.titulo;
       this.acciones = this.modalService.acciones.value;
     }
@@ -49,7 +50,14 @@ export class FormActividadesComponent {
 
   titulo = ""
   acciones = ""
+  idData = "";
 
+  ngOnInit(): void {
+
+    this.titulo = this.modalService.titulo
+    this.acciones = this.modalService.acciones.value
+    console.log(this.acciones)
+  }
   onSubmit(): void {
     this.titulo = this.modalService.titulo
     this.acciones = this.modalService.acciones.value
@@ -60,22 +68,50 @@ export class FormActividadesComponent {
       this.infoActividades.CategoriaActividad = this.activitiesForm.controls['Categoria'].value;
 
       this.dialog.closeAll();
-      this.apiService.post('Actividades', this.infoActividades).then(res => {
-        if (res == undefined) {
-          Swal.fire({
-            title: 'Creacion Realizada',
-            text: 'La actividad ha sido creada',
-            icon: 'success',
-            color: '#716add',
-          })
+
+      if (this.acciones == "Editar") {
+
+        var editActividades = {
+          DescripcionActividad: this.infoActividades.DescripcionActividad,
+          DuracionMinActividad: this.infoActividades.DuracionMinActividad,
+          CategoriaActividad: this.infoActividades.CategoriaActividad,
+          IdActividad: this.idData,
         }
-      }).catch(error => {
-        Swal.fire(
-          `Status error ${error.status}`,
-          `Message: ${error.message}`,
-          `error`
-        )
-      })
+
+        this.apiService.update('Actividades', editActividades, this.idData).then(res => {
+          if (res == undefined) {
+            Swal.fire({
+              title: 'Creacion Realizada',
+              text: 'La actividad ha sido creada',
+              icon: 'success',
+              color: '#716add',
+            })
+          }
+        }).catch(error => {
+          Swal.fire(
+            `Status error ${error.status}`,
+            `Message: ${error.message}`,
+            `error`
+          )
+        })
+      } else {
+        this.apiService.post('Actividades', this.infoActividades).then(res => {
+          if (res == undefined) {
+            Swal.fire({
+              title: 'Creacion Realizada',
+              text: 'La actividad ha sido creada',
+              icon: 'success',
+              color: '#716add',
+            })
+          }
+        }).catch(error => {
+          Swal.fire(
+            `Status error ${error.status}`,
+            `Message: ${error.message}`,
+            `error`
+          )
+        })
+      }
     } else {
       Swal.fire(
         'Ingresar los datos',

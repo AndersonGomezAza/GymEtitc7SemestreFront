@@ -34,7 +34,7 @@ export class ActividadesComponent implements OnInit, AfterViewInit {
     acciones: 'Acciones',
   };
 
-  accion: string = "Crear Actividad";
+  accion: string = "Crear";
 
   constructor(public apiService: ApiService, public dialog: MatDialog, public modalService: ModalService) {
     this.dataSource = new MatTableDataSource()
@@ -51,24 +51,15 @@ export class ActividadesComponent implements OnInit, AfterViewInit {
     this.dataSource.sort = this.sort;
   }
 
-  loadTable(data: any[]) {
-    this.displayedColumns = [];
-    for (let column in data[0]) {
-      this.displayedColumns.push(column);
-    }
-    this.displayedColumns.push('acciones');
-
-  }
-
   openDialog() {
+    this.modalService.acciones.next(this.accion);
     this.dialog.open(FormActividadesComponent, {
       width: '60%',
     });
   }
 
   editarActividad(element: any) {
-    this.modalService.acciones.next("Editar Actividad");
-    this.accion = "Editar Actividad";  
+    this.modalService.acciones.next("Editar");
 
     this.dialog.open(FormActividadesComponent, {
       height: 'auto',
@@ -95,7 +86,7 @@ export class ActividadesComponent implements OnInit, AfterViewInit {
       }
     });
   }
-  
+
 
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
@@ -105,5 +96,5 @@ export class ActividadesComponent implements OnInit, AfterViewInit {
       this.dataSource.paginator.firstPage();
     }
   }
-  
+
 }
