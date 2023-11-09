@@ -11,8 +11,7 @@ import { ValoracionesComponent } from './components/valoraciones/valoraciones.co
 import { LoginComponent } from './components/login/login.component';
 
 const routes: Routes = [
-  { path: "", component:LoginComponent },
-  { path: "Inicio", component:LoginComponent },
+  { path: "", component:ActividadesComponent },
   { path: "Actividades", component:ActividadesComponent },
   { path: "Implementos", component:ImplementosComponent },
   { path: "Maquinarias", component:MaquinariasComponent },

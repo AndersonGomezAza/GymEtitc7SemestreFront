@@ -25,3 +25,17 @@ mat-sidenav-content {
   display: flex;
   justify-content: space-between;
 }
+
+.menu-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 85%;
+  width: 100%;
+}
+.logout {
+  background-color: #adaeb7;
+  width: 80%;
+  margin: 0 auto;
+  border-radius: 10px;
+}

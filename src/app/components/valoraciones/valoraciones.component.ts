@@ -14,17 +14,17 @@ import Swal from 'sweetalert2';
 })
 export class ValoracionesComponent implements OnInit{
 
-  displayedColumns: string[] = ['FechaValoracion', 'CategoriaValoracion', 'DescricpcinValoracion', 'RecomendacionValoracion', 'acciones'];
+  displayedColumns: string[] = ['fechaValoracion', 'categoriaValoracion', 'descripcionValoracion', 'nombres', 'acciones'];
   dataSource: MatTableDataSource<any>;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
   columnHeaders = {
     idValoracion:'Id Valoracion',
-    FechaValoracion: 'Fecha de Valoración',
-    CategoriaValoracion: 'Categoria',
-    DescricpcinValoracion: 'Descripción',
-    RecomendacionValoracion: 'Nombres Cliente',
+    fechaValoracion: 'Fecha de Valoración',
+    categoriaValoracion: 'Categoria',
+    descripcionValoracion: 'Descripción',
+    nombres: 'Nombres Cliente',
     acciones: 'Acciones',
   };
 
@@ -76,7 +76,7 @@ export class ValoracionesComponent implements OnInit{
       }
     });
   }
-  
+
 
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;

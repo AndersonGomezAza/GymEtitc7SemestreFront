@@ -1,6 +1,5 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
-import { MatFormFieldModule } from '@angular/material/form-field';
 import { ApiService } from 'src/app/services/api.service';
 import Swal from 'sweetalert2';
 
@@ -15,8 +14,10 @@ export class LoginComponent implements OnInit {
   infoLogin = {
     correoLogin: "",
     passwordLogin: "",
+    nombreLogin: "",
   };
   resLogin = {};
+  loginStorage = {};
   constructor(public apiService: ApiService){}
 
   loginForm = this.fb.group({
@@ -32,23 +33,31 @@ export class LoginComponent implements OnInit {
 
   onSubmit(){
     if (this.loginForm.valid) {
-      var encontrado = true;
+      var encontrado;
       this.infoLogin.correoLogin = this.loginForm.controls['Correo'].value;
       this.infoLogin.passwordLogin = this.loginForm.controls['Password'].value;
       for (var i = 0; i < Object.keys(this.resLogin).length; i++) {
         var login = this.resLogin[i];
         if (login['correoUsuario'] ==  this.infoLogin.correoLogin && login['passwordUsuario'] ==  this.infoLogin.passwordLogin) {
+          localStorage.setItem('login', JSON.stringify(login))
+          this.infoLogin.nombreLogin = `${login['nombreUsuario']} ${login['apellidoUsuario']}`
+          encontrado = true;
           break;
         } else {
           encontrado = false;
         }
       }
       if (encontrado == true) {
+
         Swal.fire({
           title: 'Usuario Encontrado',
-          text: `Bienvenido usuario ${this.infoLogin.correoLogin}`,
+          text: `Bienvenido usuario ${this.infoLogin.nombreLogin}`,
           icon: 'success',
           color: '#716add',
+        }).then((result) => {
+          if (result.isConfirmed) {
+            window.location.reload();
+          }
         })
       }
       if (encontrado == false) {

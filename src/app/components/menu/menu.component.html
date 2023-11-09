@@ -4,15 +4,19 @@
       [mode]="(isHandset$ | async) ? 'over' : 'side'"
       [opened]="(isHandset$ | async) === false">
     <mat-toolbar>Menu</mat-toolbar>
-    <mat-nav-list>
-      <a mat-list-item href="/Inicio">Inicio</a>
-      <a mat-list-item href="/Actividades">Actividades</a>
-      <a mat-list-item href="/Implementos">Implementos</a>
-      <a mat-list-item href="/Maquinarias">Maquinarias</a>
-      <a mat-list-item href="/Planes">Planes</a>
-      <a mat-list-item href="/Rutinas">Rutinas</a>
-      <a mat-list-item href="/Usuarios">Usuarios</a>
-      <a mat-list-item href="/Valoraciones">Valoraciones</a>
+    <mat-nav-list class="menu-content">
+      <div class="menu-header">
+        <a mat-list-item href="/Actividades">Actividades</a>
+        <a mat-list-item href="/Implementos">Implementos</a>
+        <a mat-list-item href="/Maquinarias">Maquinarias</a>
+        <a mat-list-item href="/Planes">Planes</a>
+        <a mat-list-item href="/Rutinas">Rutinas</a>
+        <a mat-list-item href="/Usuarios">Usuarios</a>
+        <a mat-list-item href="/Valoraciones">Valoraciones</a>
+      </div>
+      <div class="logout">
+        <a mat-list-item id="close" (click)="logOut()">Cerrar Sesion</a>
+      </div>
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content>
@@ -27,7 +31,7 @@
       </button>
       <div class="header-menu">
         <span>GymEtitc</span>
-        <ngx-avatars name="Gym Etitc" class="avatar-menu"></ngx-avatars>
+        <ngx-avatars name="{{nameAvatar}}" class="avatar-menu"></ngx-avatars>
       </div>
     </mat-toolbar>
     <router-outlet></router-outlet>

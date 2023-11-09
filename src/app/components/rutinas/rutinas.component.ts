@@ -14,17 +14,17 @@ import Swal from 'sweetalert2';
 })
 export class RutinasComponent implements OnInit, AfterViewInit {
 
-  displayedColumns: string[] = ['NombreRutina', 'CaloriasRutina', 'DescripcionRutina', 'CategoriaRutina', 'TiempoRutinaMin', 'acciones'];
+  displayedColumns: string[] = ['nombreRutina', 'caloriasRutina', 'descripcionRutina', 'categoriaRutina', 'tiempoRutinaMin', 'acciones'];
   dataSource: MatTableDataSource<any>;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
   columnHeaders = {
-    NombreRutina: 'Nombre',
-    CaloriasRutina: 'Calorias',
-    DescripcionRutina: 'Descripcion',
-    CategoriaRutina: 'Categoria',
-    TiempoRutinaMin: 'Tiempo',
+    nombreRutina: 'Nombre',
+    caloriasRutina: 'Calorias',
+    descripcionRutina: 'Descripcion',
+    categoriaRutina: 'Categoria',
+    tiempoRutinaMin: 'Tiempo',
     acciones: 'Acciones',
   };
 
@@ -77,7 +77,7 @@ export class RutinasComponent implements OnInit, AfterViewInit {
       }
     });
   }
-  
+
 
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
