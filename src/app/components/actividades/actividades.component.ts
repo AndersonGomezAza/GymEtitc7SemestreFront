@@ -79,7 +79,7 @@ export class ActividadesComponent implements OnInit, AfterViewInit {
       confirmButtonText: 'Sí, eliminar',
     }).then((result) => {
       if (result.isConfirmed) {
-        this.apiService.delete('Actividades', actividad.id).then((res) => {
+        this.apiService.delete('Actividades', actividad.idActividad).then((res) => {
           this.ngOnInit();
           Swal.fire('Actividad Eliminada', 'La actividad ha sido eliminada.', 'success');
         });

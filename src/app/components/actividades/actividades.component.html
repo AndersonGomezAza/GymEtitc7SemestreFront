@@ -15,11 +15,11 @@
     <!-- Generar dinámicamente las columnas -->
     <ng-container *ngFor="let column of displayedColumns" [matColumnDef]="column">
       <div *ngIf="column!='acciones'">
-        <mat-header-cell *matHeaderCellDef> {{ columnHeaders[column] }} </mat-header-cell>
+        <mat-header-cell *matHeaderCellDef mat-sort-header> {{ columnHeaders[column] }} </mat-header-cell>
         <mat-cell *matCellDef="let element"> {{ element[column] }} </mat-cell>
       </div>
       <div *ngIf="column=='acciones'">
-        <mat-header-cell *matHeaderCellDef> {{ columnHeaders[column] }} </mat-header-cell>
+        <mat-header-cell *matHeaderCellDef > {{ columnHeaders[column] }} </mat-header-cell>
         <mat-cell *matCellDef="let element" class="container-acciones">
           <a class="btn-acciones" (click)="editarActividad(element)"><i class='bx bx-edit-alt'></i></a>
           <a class="btn-acciones" (click)="removeActividad(element)"><i class='bx bx-trash'></i></a>

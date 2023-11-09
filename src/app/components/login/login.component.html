@@ -1,0 +1,31 @@
+<div id="contenedor">
+  <div id="central">
+      <div id="login">
+          <div class="titulo">
+              Bienvenido
+          </div>
+          <form  [formGroup]="loginForm" novalidate (ngSubmit)="onSubmit()"  id="loginform">
+            <mat-form-field class="full-width">
+              <input matInput type="text"  placeholder="Usuario" formControlName="Correo">
+              <mat-error *ngIf="loginForm.controls['Correo'].hasError('required')">
+                La duracion en minutos de la actividad es <strong>Requerida</strong>
+              </mat-error>
+            </mat-form-field>
+            <mat-form-field class="full-width">
+              <input matInput type="password" placeholder="Contraseña"  formControlName="Password">
+              <mat-error *ngIf="loginForm.controls['Password'].hasError('required')">
+                La duracion en minutos de la actividad es <strong>Requerida</strong>
+              </mat-error>
+            </mat-form-field>
+              <button mat-raised-button color="primary" type="submit">Ingresar</button>
+          </form>
+          <div class="pie-form">
+              <a href="#">¿Perdiste tu contraseña?</a>
+              <a href="#">¿No tienes Cuenta? Registrate</a>
+          </div>
+      </div>
+      <div class="inferior">
+          <a href="#"></a>
+      </div>
+  </div>
+</div>

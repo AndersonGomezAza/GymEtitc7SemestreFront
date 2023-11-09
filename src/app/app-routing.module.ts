@@ -8,10 +8,11 @@ import { InicioComponent } from './components/inicio/inicio.component';
 import { RutinasComponent } from './components/rutinas/rutinas.component';
 import { UsuariosComponent } from './components/usuarios/usuarios.component';
 import { ValoracionesComponent } from './components/valoraciones/valoraciones.component';
+import { LoginComponent } from './components/login/login.component';
 
 const routes: Routes = [
-  { path: "", component:InicioComponent },
-  { path: "Inicio", component:InicioComponent },
+  { path: "", component:LoginComponent },
+  { path: "Inicio", component:LoginComponent },
   { path: "Actividades", component:ActividadesComponent },
   { path: "Implementos", component:ImplementosComponent },
   { path: "Maquinarias", component:MaquinariasComponent },

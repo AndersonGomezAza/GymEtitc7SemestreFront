@@ -56,7 +56,6 @@ export class FormActividadesComponent implements OnInit{
 
     this.titulo = this.modalService.titulo
     this.acciones = this.modalService.acciones.value
-    console.log(this.acciones)
   }
   onSubmit(): void {
     this.titulo = this.modalService.titulo
@@ -81,8 +80,8 @@ export class FormActividadesComponent implements OnInit{
         this.apiService.update('Actividades', editActividades, this.idData).then(res => {
           if (res == undefined) {
             Swal.fire({
-              title: 'Creacion Realizada',
-              text: 'La actividad ha sido creada',
+              title: 'Edicion Realizada',
+              text: 'La actividad ha sido actualizadang ',
               icon: 'success',
               color: '#716add',
             })
@@ -94,7 +93,7 @@ export class FormActividadesComponent implements OnInit{
             `error`
           )
         })
-      } else {
+      } else if (this.acciones == "Crear") {
         this.apiService.post('Actividades', this.infoActividades).then(res => {
           if (res == undefined) {
             Swal.fire({

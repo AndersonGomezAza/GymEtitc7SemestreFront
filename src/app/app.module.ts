@@ -43,6 +43,7 @@ import { FormValoracionesComponent } from './components/forms/form-valoraciones/
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { CommonModule } from '@angular/common';
+import { LoginComponent } from './components/login/login.component';
 
 
 @NgModule({
@@ -62,7 +63,8 @@ import { CommonModule } from '@angular/common';
     FormMaquinariasComponent,
     FormPlanesComponent,
     FormRutinasComponent,
-    FormValoracionesComponent, 
+    FormValoracionesComponent,
+    LoginComponent,
   ],
   imports: [
     BrowserModule,
