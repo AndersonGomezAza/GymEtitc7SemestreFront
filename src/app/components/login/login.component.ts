@@ -34,8 +34,8 @@ export class LoginComponent implements OnInit {
   onSubmit(){
     if (this.loginForm.valid) {
       var encontrado;
-      this.infoLogin.correoLogin = this.loginForm.controls['Correo'].value;
-      this.infoLogin.passwordLogin = this.loginForm.controls['Password'].value;
+      this.infoLogin.correoLogin = String(this.loginForm.controls['Correo'].value).toLowerCase();
+      this.infoLogin.passwordLogin = String(this.loginForm.controls['Password'].value).toLowerCase();
       for (var i = 0; i < Object.keys(this.resLogin).length; i++) {
         var login = this.resLogin[i];
         if (login['correoUsuario'] ==  this.infoLogin.correoLogin && login['passwordUsuario'] ==  this.infoLogin.passwordLogin) {
@@ -56,7 +56,7 @@ export class LoginComponent implements OnInit {
           color: '#716add',
         }).then((result) => {
           if (result.isConfirmed) {
-            window.location.reload();
+            window.location.href = '/Actividades';
           }
         })
       }
