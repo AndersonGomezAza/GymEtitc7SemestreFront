@@ -1,0 +1,33 @@
+<div id="contenedor">
+  <div id="central">
+      <div id="login">
+          <div class="titulo">
+              Registrar Usuario
+          </div>
+          <form  [formGroup]="loginForm" novalidate (ngSubmit)="onSubmit()"  id="loginform">
+            <mat-form-field class="full-width">
+              <input matInput type="email"  placeholder="Correo" formControlName="Correo">
+              <mat-error *ngIf="loginForm.controls['Correo'].hasError('required')"></mat-error>
+            </mat-form-field>
+            <mat-form-field class="full-width">
+              <input matInput type="password" placeholder="Contraseña"  formControlName="Password">
+              <mat-error *ngIf="loginForm.controls['Password'].hasError('required')"></mat-error>
+            </mat-form-field>
+            <div class="name">
+              <mat-form-field class="full-width">
+                <input matInput type="text"  placeholder="Nombre" formControlName="Nombres">
+                <mat-error *ngIf="loginForm.controls['Nombres'].hasError('required')"></mat-error>
+              </mat-form-field>
+              <mat-form-field class="full-width">
+                <input matInput type="text" placeholder="Apellidos"  formControlName="Apellidos">
+                <mat-error *ngIf="loginForm.controls['Apellidos'].hasError('required')"></mat-error>
+              </mat-form-field>
+            </div>
+            <div class="botones">
+              <button mat-raised-button color="primary" type="submit">Registrar</button>
+              <button mat-raised-button color="primary" (click)="cancelRegister()">Cancelar</button>
+            </div>
+          </form>
+      </div>
+  </div>
+</div>

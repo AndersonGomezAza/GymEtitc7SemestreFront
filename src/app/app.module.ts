@@ -44,6 +44,8 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { CommonModule } from '@angular/common';
 import { LoginComponent } from './components/login/login.component';
+import { RecoveryPasswordComponent } from './components/recovery-password/recovery-password.component';
+import { RegistrarusuarioComponent } from './components/registrarusuario/registrarusuario.component';
 
 
 @NgModule({
@@ -65,6 +67,8 @@ import { LoginComponent } from './components/login/login.component';
     FormRutinasComponent,
     FormValoracionesComponent,
     LoginComponent,
+    RecoveryPasswordComponent,
+    RegistrarusuarioComponent,
   ],
   imports: [
     BrowserModule,

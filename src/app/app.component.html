@@ -1,6 +1,12 @@
-<div *ngIf="sesionIniciada == true">
+<div *ngIf="sesionIniciada == 0">
   <app-menu></app-menu>
 </div>
-<div *ngIf="sesionIniciada == false">
+<div *ngIf="sesionIniciada == 1">
+  <app-recovery-password></app-recovery-password>
+</div>
+<div *ngIf="sesionIniciada == 2">
+  <app-registrarusuario></app-registrarusuario>
+</div>
+<div *ngIf="sesionIniciada == 3">
   <app-login></app-login>
 </div>

@@ -11,7 +11,7 @@ import { map, shareReplay } from 'rxjs/operators';
 export class MenuComponent {
   private breakpointObserver = inject(BreakpointObserver);
 
-  nameAvatar = JSON.parse(localStorage.getItem('login')).nombreUsuario +' '+ JSON.parse(localStorage.getItem('login')).apellidoUsuario;
+  nameAvatar = JSON.parse(sessionStorage.getItem('login')).nombreUsuario +' '+ JSON.parse(sessionStorage.getItem('login')).apellidoUsuario;
 
   isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Web)
     .pipe(
@@ -20,7 +20,7 @@ export class MenuComponent {
     );
 
     logOut(){
-      localStorage.removeItem('login');
+      sessionStorage.removeItem('login');
         window.location.reload();
     }
 }
