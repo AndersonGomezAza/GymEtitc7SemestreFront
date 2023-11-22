@@ -6,6 +6,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { ApiService } from 'src/app/services/api.service';
 import { FormPlanesComponent } from '../forms/form-planes/form-planes.component';
 import Swal from 'sweetalert2';
+import { ModalService } from 'src/app/modal/modal.service';
 
 @Component({
   selector: 'app-planes',
@@ -26,7 +27,9 @@ export class PlanesComponent implements OnInit, AfterViewInit {
     acciones: 'Acciones',
   };
 
-  constructor(public apiService: ApiService, public dialog: MatDialog) {
+  accion: string = "Crear";
+
+  constructor(public apiService: ApiService, public dialog: MatDialog, public modalService: ModalService) {
     this.dataSource = new MatTableDataSource()
   }
 
@@ -56,6 +59,16 @@ export class PlanesComponent implements OnInit, AfterViewInit {
     });
   }
 
+  editarActividad(element: any) {
+    this.modalService.acciones.next("Editar");
+
+    this.dialog.open(FormPlanesComponent, {
+      height: 'auto',
+      width: 'auto',
+      data: element // El objeto 'element' ahora contiene los datos del dueño a editar
+    });
+  }
+
   removePlan(plan) {
     Swal.fire({
       title: '¿Estás seguro?',
@@ -67,14 +80,14 @@ export class PlanesComponent implements OnInit, AfterViewInit {
       confirmButtonText: 'Sí, eliminar',
     }).then((result) => {
       if (result.isConfirmed) {
-        this.apiService.delete('Planes', plan.id).then((res) => {
+        this.apiService.delete('Planes', plan.idPlan).then((res) => {
           this.ngOnInit();
           Swal.fire('Plan Eliminado', 'El plan ha sido eliminado.', 'success');
         });
       }
     });
   }
-  
+
 
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;

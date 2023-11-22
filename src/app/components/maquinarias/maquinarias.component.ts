@@ -28,7 +28,7 @@ export class MaquinariasComponent implements OnInit, AfterViewInit {
     acciones: 'Acciones',
   };
 
-  
+
   accion: string = "Crear Maquinaria";
 
   constructor(public apiService: ApiService, public dialog: MatDialog, public modalService: ModalService) {
@@ -61,11 +61,11 @@ export class MaquinariasComponent implements OnInit, AfterViewInit {
     });
   }
 
-  
+
   editarMaquinaria(element: any) {
     this.modalService.acciones.next("Editar Maquinaria");
     this.accion = "Editar Maquinaria";
-  
+
     this.dialog.open(FormMaquinariasComponent, {
       height: 'auto',
       width: 'auto',
@@ -84,14 +84,14 @@ export class MaquinariasComponent implements OnInit, AfterViewInit {
       confirmButtonText: 'Sí, eliminar',
     }).then((result) => {
       if (result.isConfirmed) {
-        this.apiService.delete('Maquinarias', maquinaria.id).then((res) => {
+        this.apiService.delete('Maquinarias', maquinaria.idMaquinaria).then((res) => {
           this.ngOnInit();
           Swal.fire('Maquinaria Eliminada', 'La maquinaria ha sido eliminada.', 'success');
         });
       }
     });
   }
-  
+
 
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;

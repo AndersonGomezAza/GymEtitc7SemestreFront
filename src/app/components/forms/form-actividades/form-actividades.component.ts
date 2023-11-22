@@ -53,7 +53,6 @@ export class FormActividadesComponent implements OnInit{
   idData = "";
 
   ngOnInit(): void {
-
     this.titulo = this.modalService.titulo
     this.acciones = this.modalService.acciones.value
   }
@@ -81,7 +80,7 @@ export class FormActividadesComponent implements OnInit{
           if (res == undefined) {
             Swal.fire({
               title: 'Edicion Realizada',
-              text: 'La actividad ha sido actualizadang ',
+              text: 'La actividad ha sido actualizada ',
               icon: 'success',
               color: '#716add',
             })

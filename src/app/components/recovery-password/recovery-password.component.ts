@@ -12,7 +12,7 @@ export class RecoveryPasswordComponent implements OnInit {
 
   private fb = inject(FormBuilder);
   loginForm = this.fb.group({
-    Correo: [null, [Validators.required]],
+    Correo: [null, [Validators.required, Validators.pattern("^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$")]],
   });
 
   infoRes = {}

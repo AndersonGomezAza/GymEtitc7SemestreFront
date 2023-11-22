@@ -21,7 +21,7 @@ export class ImplementosComponent implements OnInit, AfterViewInit{
   @ViewChild(MatSort) sort: MatSort;
 
   columnHeaders = {
-    
+
     nombreImplemento: 'Nombre',
     descripcionImplemento: 'Descripcion',
     categoriaImplemento: 'Categoria',
@@ -63,7 +63,7 @@ export class ImplementosComponent implements OnInit, AfterViewInit{
   editarImplemento(element: any) {
     this.modalService.acciones.next("Editar Implemento");
     this.accion = "Editar Implemento";
-  
+
     this.dialog.open(FormImplementosComponent, {
       height: 'auto',
       width: 'auto',
@@ -82,7 +82,7 @@ export class ImplementosComponent implements OnInit, AfterViewInit{
       confirmButtonText: 'Sí, eliminar',
     }).then((result) => {
       if (result.isConfirmed) {
-        this.apiService.delete('Implementos', implemento.id).then((res) => {
+        this.apiService.delete('Implementos', implemento.idImplemento).then((res) => {
           this.ngOnInit();
           Swal.fire('Implemento Eliminado', 'El implemento ha sido eliminado.', 'success');
         });
@@ -98,7 +98,7 @@ export class ImplementosComponent implements OnInit, AfterViewInit{
       this.dataSource.paginator.firstPage();
     }
   }
-  
+
 }
 
 

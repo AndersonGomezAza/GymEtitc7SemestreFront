@@ -69,7 +69,7 @@ export class ValoracionesComponent implements OnInit{
       confirmButtonText: 'Sí, eliminar',
     }).then((result) => {
       if (result.isConfirmed) {
-        this.apiService.delete('Valoraciones', valoracion.id).then((res) => {
+        this.apiService.delete('Valoraciones', valoracion.idValoracion).then((res) => {
           this.ngOnInit();
           Swal.fire('Valoración Eliminada', 'La valoración ha sido eliminada.', 'success');
         });

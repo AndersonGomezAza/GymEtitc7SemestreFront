@@ -69,7 +69,7 @@ export class UsuariosComponent implements OnInit {
       confirmButtonText: 'Sí, eliminar',
     }).then((result) => {
       if (result.isConfirmed) {
-        this.apiService.delete('Usuarios', usuario.id).then((res) => {
+        this.apiService.delete('Usuarios', usuario.idUsuario).then((res) => {
           this.ngOnInit();
           Swal.fire('Usuario Eliminado', 'El usuario ha sido eliminado.', 'success');
         });

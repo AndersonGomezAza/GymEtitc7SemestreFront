@@ -70,7 +70,7 @@ export class RutinasComponent implements OnInit, AfterViewInit {
       confirmButtonText: 'Sí, eliminar',
     }).then((result) => {
       if (result.isConfirmed) {
-        this.apiService.delete('Rutinas', rutina.id).then((res) => {
+        this.apiService.delete('Rutinas', rutina.idRutina).then((res) => {
           this.ngOnInit();
           Swal.fire('Rutina Eliminada', 'La rutina ha sido eliminada.', 'success');
         });

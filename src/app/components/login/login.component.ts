@@ -21,7 +21,7 @@ export class LoginComponent implements OnInit {
   constructor(public apiService: ApiService){}
 
   loginForm = this.fb.group({
-    Correo: [null, [Validators.required]],
+    Correo: [null, [Validators.required, Validators.pattern("^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$")]],
     Password: [null, [Validators.required]],
   });
 

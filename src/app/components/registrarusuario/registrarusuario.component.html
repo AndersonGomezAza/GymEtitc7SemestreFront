@@ -7,27 +7,32 @@
           <form  [formGroup]="loginForm" novalidate (ngSubmit)="onSubmit()"  id="loginform">
             <mat-form-field class="full-width">
               <input matInput type="email"  placeholder="Correo" formControlName="Correo">
-              <mat-error *ngIf="loginForm.controls['Correo'].hasError('required')"></mat-error>
+              <mat-error *ngIf="loginForm.controls['Correo'].hasError('required')">Digita el Correo</mat-error>
+              <mat-error *ngIf="loginForm.controls['Correo'].hasError('pattern')">El formato de correo es incorrecto recuerda que es example@example.com</mat-error>
             </mat-form-field>
             <mat-form-field class="full-width">
               <input matInput type="password" placeholder="Contraseña"  formControlName="Password">
-              <mat-error *ngIf="loginForm.controls['Password'].hasError('required')"></mat-error>
+              <mat-error *ngIf="loginForm.controls['Password'].hasError('required')">Digita la Contraseña</mat-error>
+            </mat-form-field>
+            <mat-form-field class="full-width">
+              <input matInput type="password" (keyup)="ConfirmPassword()" placeholder="Confirmar Contraseña"  formControlName="PasswordConfirm">
+              <mat-error *ngIf="loginForm.controls['PasswordConfirm'].hasError('required')">Confirma la contraseña</mat-error>
             </mat-form-field>
             <div class="name">
               <mat-form-field class="full-width">
                 <input matInput type="text"  placeholder="Nombre" formControlName="Nombres">
-                <mat-error *ngIf="loginForm.controls['Nombres'].hasError('required')"></mat-error>
+                <mat-error *ngIf="loginForm.controls['Nombres'].hasError('required')">Digita los Nombres</mat-error>
               </mat-form-field>
               <mat-form-field class="full-width">
                 <input matInput type="text" placeholder="Apellidos"  formControlName="Apellidos">
-                <mat-error *ngIf="loginForm.controls['Apellidos'].hasError('required')"></mat-error>
+                <mat-error *ngIf="loginForm.controls['Apellidos'].hasError('required')">Digita los Apellidos</mat-error>
               </mat-form-field>
             </div>
             <div class="botones">
               <button mat-raised-button color="primary" type="submit">Registrar</button>
-              <button mat-raised-button color="primary" (click)="cancelRegister()">Cancelar</button>
             </div>
           </form>
+          <button mat-raised-button color="primary" (click)="cancelRegister()">Cancelar</button>
       </div>
   </div>
 </div>
