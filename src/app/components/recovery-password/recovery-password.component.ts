@@ -65,7 +65,7 @@ export class RecoveryPasswordComponent implements OnInit {
   }
 
   cancelRecovery(){
-    sessionStorage.removeItem('recovery');
+    localStorage.removeItem('recovery');
     window.location.reload();
   }
 }

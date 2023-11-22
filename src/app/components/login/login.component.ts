@@ -39,7 +39,7 @@ export class LoginComponent implements OnInit {
       for (var i = 0; i < Object.keys(this.resLogin).length; i++) {
         var login = this.resLogin[i];
         if (login['correoUsuario'] ==  this.infoLogin.correoLogin && login['passwordUsuario'] ==  this.infoLogin.passwordLogin) {
-          sessionStorage.setItem('login', JSON.stringify(login))
+          localStorage.setItem('login', JSON.stringify(login))
           this.infoLogin.nombreLogin = `${login['nombreUsuario']} ${login['apellidoUsuario']}`
           encontrado = true;
           break;
@@ -77,12 +77,12 @@ export class LoginComponent implements OnInit {
   }
 
   recovery(){
-    sessionStorage.setItem('recovery', 'Recuperar Contraseña');
+    localStorage.setItem('recovery', 'Recuperar Contraseña');
     window.location.reload();
   }
 
   register(){
-    sessionStorage.setItem('register', 'Recuperar Contraseña');
+    localStorage.setItem('register', 'Recuperar Contraseña');
     window.location.reload();
   }
 }

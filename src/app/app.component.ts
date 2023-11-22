@@ -9,11 +9,11 @@ export class AppComponent implements OnInit{
   sesionIniciada;
 
   ngOnInit(): void {
-      if (sessionStorage.key(0) == 'login') {
+      if (localStorage.key(0) == 'login') {
         this.sesionIniciada = 0;
-      } else if (sessionStorage.key(0) == 'recovery') {
+      } else if (localStorage.key(0) == 'recovery') {
         this.sesionIniciada = 1;
-      } else if (sessionStorage.key(0) == 'register'){
+      } else if (localStorage.key(0) == 'register'){
         this.sesionIniciada = 2;
       } else {
         this.sesionIniciada = 3;
