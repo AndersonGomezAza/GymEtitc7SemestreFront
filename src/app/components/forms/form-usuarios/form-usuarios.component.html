@@ -7,19 +7,22 @@
       <div class="row">
         <div class="col">
           <mat-form-field class="full-width">
+            <input matInput placeholder="Numero Documento" formControlName="NumDocumento">
+            <mat-error *ngIf="usuariosForm.controls['NumDocumento'].hasError('required')">
+              El Numero Documento es <strong>Requerido</strong>
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <mat-form-field class="full-width">
             <input matInput placeholder="Nombre" formControlName="Nombre">
             <mat-error *ngIf="usuariosForm.controls['Nombre'].hasError('required')">
               El nombre es <strong>Requerido</strong>
             </mat-error>
           </mat-form-field>
         </div>
-        <div class="col">
-          <mat-form-field class="full-width">
-            <input matInput type="number" placeholder="Plan Id" formControlName="PlanId">
-          </mat-form-field>
-        </div>
-      </div>
-      <div class="row">
         <div class="col">
           <mat-form-field class="full-width">
             <input matInput placeholder="Apellido" formControlName="Apellido">
@@ -41,7 +44,7 @@
       </div>
     </mat-card-content>
     <mat-card-actions>
-      <button mat-raised-button color="primary" type="submit">Crear</button>
+      <button mat-raised-button color="primary" type="submit">{{acciones}}</button>
       <button mat-button mat-dialog-close>Cancel</button>
     </mat-card-actions>
   </mat-card>

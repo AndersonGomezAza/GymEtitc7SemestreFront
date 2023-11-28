@@ -1,8 +1,6 @@
 export class usuariosModel {
-    FechaRegistro: Date;
-    Nombres: string; 
-    Apellidos: string;
-    Rol: string;
-    TipoDoc: string; 
-    IdPlan: number; 
+    Nombre: string;
+    NumDocumento: string;
+    Apellido: string;
+    Descripcion: string;
 }

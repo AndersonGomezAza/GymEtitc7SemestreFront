@@ -7,6 +7,7 @@ import { ApiService } from 'src/app/services/api.service';
 import { MatDialog } from '@angular/material/dialog';
 import { FormUsuariosComponent } from '../forms/form-usuarios/form-usuarios.component';
 import Swal from 'sweetalert2';
+import { ModalService } from 'src/app/modal/modal.service';
 
 @Component({
   selector: 'app-usuarios',
@@ -28,7 +29,9 @@ export class UsuariosComponent implements OnInit {
     acciones: 'Acciones',
   };
 
-  constructor(public apiService: ApiService, public dialog:MatDialog) {
+  accion: string = "Crear";
+
+  constructor(public apiService: ApiService, public dialog:MatDialog, public modalService: ModalService) {
     this.dataSource = new MatTableDataSource()
   }
 
@@ -53,8 +56,20 @@ export class UsuariosComponent implements OnInit {
   }
 
   openDialog() {
+
+    this.modalService.acciones.next(this.accion);
     this.dialog.open(FormUsuariosComponent, {
       width: '60%',
+    });
+  }
+
+  editarUsuario(element: any) {
+    this.modalService.acciones.next("Editar");
+
+    this.dialog.open(FormUsuariosComponent, {
+      height: 'auto',
+      width: 'auto',
+      data: element // El objeto 'element' ahora contiene los datos del dueño a editar
     });
   }
 
