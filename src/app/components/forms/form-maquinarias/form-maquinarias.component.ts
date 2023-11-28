@@ -1,4 +1,4 @@
-import { Component, Inject, inject } from '@angular/core';
+import { Component, Inject, inject, OnInit } from '@angular/core';
 
 import { FormBuilder, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
@@ -14,7 +14,7 @@ import Swal from 'sweetalert2';
   templateUrl: './form-maquinarias.component.html',
   styleUrls: ['./form-maquinarias.component.css']
 })
-export class FormMaquinariasComponent {
+export class FormMaquinariasComponent implements OnInit{
   private fb = inject(FormBuilder);
   dataSource: any;
 
@@ -34,7 +34,7 @@ export class FormMaquinariasComponent {
         Estado: data.estadoMaquinaria,
         Serial: data.serialMaquinaria,
       });
-
+      this.idData = data.idMaquinaria;
       this.titulo = this.modalService.titulo;
       this.acciones = this.modalService.acciones.value;
     }
@@ -58,9 +58,18 @@ export class FormMaquinariasComponent {
   };
 
   titulo = ""
+  idData = ""
   acciones = ""
 
+  ngOnInit(): void {
+    this.titulo = this.modalService.titulo
+    this.acciones = this.modalService.acciones.value
+  }
+
   onSubmit(): void {
+    this.titulo = this.modalService.titulo
+    this.acciones = this.modalService.acciones.value
+
     if (this.machineryForm.valid) {
       this.infoMaquinarias.NombreMaquinaria = this.machineryForm.controls['Nombre'].value;
       this.infoMaquinarias.CategoriaMaquinaria = this.machineryForm.controls['Descripcion'].value;
@@ -69,22 +78,52 @@ export class FormMaquinariasComponent {
       this.infoMaquinarias.SerialMaquinaria = this.machineryForm.controls['Serial'].value;
 
       this.dialog.closeAll();
-      this.apiService.post('Maquinarias', this.infoMaquinarias).then(res => {
-        if (res == undefined) {
-          Swal.fire({
-            title: 'Creacion Realizada',
-            text: 'La maquinaria ha sido creada',
-            icon: 'success',
-            color: '#716add',
-          })
+
+      if (this.acciones == "Editar") {
+
+        var editMaquinaria = {
+          NombreMaquinaria: this.infoMaquinarias.NombreMaquinaria,
+          CategoriaMaquinaria: this.infoMaquinarias.CategoriaMaquinaria,
+          DescripcionMaquinaria: this.infoMaquinarias.DescripcionMaquinaria,
+          EstadoMaquinaria: this.infoMaquinarias.EstadoMaquinaria,
+          SerialMaquinaria: this.infoMaquinarias.SerialMaquinaria,
+          IdMaquinaria: this.idData,
         }
-      }).catch(error => {
-        Swal.fire(
-          `Status error ${error.status}`,
-          `Message: ${error.message}`,
-          `error`
-        )
-      })
+
+        this.apiService.update('Maquinarias', editMaquinaria, this.idData).then(res => {
+          if (res == undefined) {
+            Swal.fire({
+              title: 'Edicion Realizada',
+              text: 'La actividad ha sido actualizada ',
+              icon: 'success',
+              color: '#716add',
+            })
+          }
+        }).catch(error => {
+          Swal.fire(
+            `Status error ${error.status}`,
+            `Message: ${error.message}`,
+            `error`
+          )
+        })
+      } else if (this.acciones == "Crear") {
+        this.apiService.post('Maquinarias', this.infoMaquinarias).then(res => {
+          if (res == undefined) {
+            Swal.fire({
+              title: 'Creacion Realizada',
+              text: 'La maquinaria ha sido creada',
+              icon: 'success',
+              color: '#716add',
+            })
+          }
+        }).catch(error => {
+          Swal.fire(
+            `Status error ${error.status}`,
+            `Message: ${error.message}`,
+            `error`
+          )
+        })
+      }
     } else {
       Swal.fire(
         'Ingresar los datos',

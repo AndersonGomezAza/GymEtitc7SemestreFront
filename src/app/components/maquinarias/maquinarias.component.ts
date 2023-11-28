@@ -29,7 +29,7 @@ export class MaquinariasComponent implements OnInit, AfterViewInit {
   };
 
 
-  accion: string = "Crear Maquinaria";
+  accion: string = "Crear";
 
   constructor(public apiService: ApiService, public dialog: MatDialog, public modalService: ModalService) {
     this.dataSource = new MatTableDataSource()
@@ -56,6 +56,7 @@ export class MaquinariasComponent implements OnInit, AfterViewInit {
   }
 
   openDialog() {
+    this.modalService.acciones.next(this.accion);
     this.dialog.open(FormMaquinariasComponent, {
       width: '60%',
     });
@@ -63,8 +64,8 @@ export class MaquinariasComponent implements OnInit, AfterViewInit {
 
 
   editarMaquinaria(element: any) {
-    this.modalService.acciones.next("Editar Maquinaria");
-    this.accion = "Editar Maquinaria";
+    this.modalService.acciones.next("Editar");
+    this.accion = "Editar";
 
     this.dialog.open(FormMaquinariasComponent, {
       height: 'auto',
