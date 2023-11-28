@@ -15,20 +15,20 @@ import { ModalService } from 'src/app/modal/modal.service';
 })
 export class ImplementosComponent implements OnInit, AfterViewInit{
 
-  displayedColumns: string[] = ['nombreImplemento', 'descripcionImplemento', 'categoriaImplemento', 'acciones'];
+  displayedColumns: string[] = ['nombreImplemento', 'descripcionImplemento', 'categoriaImplemento', 'serialImplemento', 'acciones'];
   dataSource: MatTableDataSource<any>;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
   columnHeaders = {
-
     nombreImplemento: 'Nombre',
     descripcionImplemento: 'Descripcion',
     categoriaImplemento: 'Categoria',
+    serialImplemento: 'Serial',
     acciones: 'Acciones',
   };
 
-  accion: string = "Crear Implemento";
+  accion: string = "Crear";
 
   constructor(public apiService: ApiService, public dialog: MatDialog, public modalService: ModalService) {
     this.dataSource = new MatTableDataSource()
@@ -55,14 +55,15 @@ export class ImplementosComponent implements OnInit, AfterViewInit{
   }
 
   openDialog() {
+    this.modalService.acciones.next(this.accion);
     this.dialog.open(FormImplementosComponent, {
       width: '60%',
     });
   }
 
   editarImplemento(element: any) {
-    this.modalService.acciones.next("Editar Implemento");
-    this.accion = "Editar Implemento";
+    this.modalService.acciones.next("Editar");
+    this.accion = "Editar";
 
     this.dialog.open(FormImplementosComponent, {
       height: 'auto',

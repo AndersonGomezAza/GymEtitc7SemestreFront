@@ -1,4 +1,4 @@
-import { Component, Inject, inject } from '@angular/core';
+import { Component, Inject, inject, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
 import { implementosModel } from 'src/app/models/implementosModel';
@@ -13,12 +13,13 @@ import { MatTableDataSource } from '@angular/material/table';
   templateUrl: './form-implementos.component.html',
   styleUrls: ['./form-implementos.component.css']
 })
-export class FormImplementosComponent {
+export class FormImplementosComponent implements OnInit{
   private fb = inject(FormBuilder);
   implementsForm = this.fb.group({
     Nombre: [null, [Validators.required, Validators.maxLength(30)]],
     Descripcion: [null, [Validators.required, Validators.max(60)]],
     Categoria:   [null, [Validators.required, Validators.maxLength(20)]],
+    Serial:   [null, [Validators.required, Validators.maxLength(20)]],
   });
   dataSource: any;
 
@@ -32,17 +33,18 @@ export class FormImplementosComponent {
 
     if (data) {
       this.implementsForm.setValue({
-        Nombre: data.nombreImplemento, 
-        Descripcion: data.descripcionImplemento, 
-        Categoria: data.categoriaImplemento, 
+        Nombre: data.nombreImplemento,
+        Descripcion: data.descripcionImplemento,
+        Categoria: data.categoriaImplemento,
+        Serial: data.serialImplemento,
       });
-      
+      this.idData = data.idImplemento
       this.titulo = this.modalService.titulo;
       this.acciones = this.modalService.acciones.value;
     }
   }
 
-  infoImplemetos: implementosModel = {
+  infoImplementos: implementosModel = {
     NombreImplemento:"",
     CategoriaImplemento:"",
     DescripcionImplemento:"",
@@ -51,31 +53,68 @@ export class FormImplementosComponent {
 
   titulo=""
   acciones=""
+  idData = ""
+
+  ngOnInit(): void {
+    this.titulo = this.modalService.titulo
+    this.acciones = this.modalService.acciones.value
+  }
 
   onSubmit(): void {
+    this.titulo = this.modalService.titulo
+    this.acciones = this.modalService.acciones.value
+
     if (this.implementsForm.valid) {
-      this.infoImplemetos.NombreImplemento = this.implementsForm.controls['Nombre'].value;
-      this.infoImplemetos.CategoriaImplemento = this.implementsForm.controls['Descripcion'].value;
-      this.infoImplemetos.DescripcionImplemento = this.implementsForm.controls['Categoria'].value;
-      this.infoImplemetos.SerialImplemento = this.implementsForm.controls['Serial'].value;
+      this.infoImplementos.NombreImplemento = this.implementsForm.controls['Nombre'].value;
+      this.infoImplementos.CategoriaImplemento = this.implementsForm.controls['Descripcion'].value;
+      this.infoImplementos.DescripcionImplemento = this.implementsForm.controls['Categoria'].value;
+      this.infoImplementos.SerialImplemento = this.implementsForm.controls['Serial'].value;
 
       this.dialog.closeAll();
-      this.apiService.post('Implementos', this.infoImplemetos).then(res=>{
-        if (res == undefined) {
-          Swal.fire({
-            title: 'Creacion Realizada',
-            text: 'El implemento ha sido creada',
-            icon: 'success',
-            color: '#716add',
-          })
+      if (this.acciones == "Editar") {
+
+        var editImplemento = {
+          nombreImplemento: this.infoImplementos.NombreImplemento,
+          categoriaImplemento: this.infoImplementos.CategoriaImplemento,
+          descripcionImplemento: this.infoImplementos.DescripcionImplemento,
+          serialImplemento: this.infoImplementos.SerialImplemento,
+          idImplemento: this.idData,
         }
-      }).catch(error=>{
-        Swal.fire(
-          `Status error ${error.status}`,
-          `Message: ${error.message}`,
-          `error`
-        )
-      })
+
+        this.apiService.update('Implementos', editImplemento, this.idData).then(res => {
+          if (res == undefined) {
+            Swal.fire({
+              title: 'Edicion Realizada',
+              text: 'El implemento ha sido actualizado ',
+              icon: 'success',
+              color: '#716add',
+            })
+          }
+        }).catch(error => {
+          Swal.fire(
+            `Status error ${error.status}`,
+            `Message: ${error.message}`,
+            `error`
+          )
+        })
+      } else if (this.acciones == "Crear") {
+        this.apiService.post('Implementos', this.infoImplementos).then(res=>{
+          if (res == undefined) {
+            Swal.fire({
+              title: 'Creacion Realizada',
+              text: 'El implemento ha sido creada',
+              icon: 'success',
+              color: '#716add',
+            })
+          }
+        }).catch(error=>{
+          Swal.fire(
+            `Status error ${error.status}`,
+            `Message: ${error.message}`,
+            `error`
+          )
+        })
+      }
     }else{
       Swal.fire(
         'Ingresar los datos',
