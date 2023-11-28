@@ -54,6 +54,7 @@ export class PlanesComponent implements OnInit, AfterViewInit {
   }
 
   openDialog() {
+    this.modalService.acciones.next(this.accion);
     this.dialog.open(FormPlanesComponent, {
       width: '60%',
     });

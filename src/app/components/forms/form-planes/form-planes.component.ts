@@ -40,7 +40,7 @@ export class FormPlanesComponent implements OnInit{
   idData = "";
 
   planesForm = this.fb.group({
-    Descripcion: [null, [Validators.required, Validators.maxLength(30)]],
+    Descripcion: [null, [Validators.required]],
     Duracion: [null, [Validators.required, Validators.max(12)]],
     Precio: [null, [Validators.required, Validators.pattern('^[0-9]+[^.]')]]
   });
