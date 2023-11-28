@@ -1,7 +1,7 @@
 <div class="search-table">
   <mat-form-field>
     <mat-label>Busqueda</mat-label>
-    <input matInput (keyup)="applyFilter($event)" placeholder="Ex. Mia" #input>
+    <input matInput (keyup)="applyFilter($event)" placeholder="Ejemplo: Pesas Avanzadas" #input>
   </mat-form-field>
 </div>
 
@@ -21,7 +21,7 @@
       <div *ngIf="column=='acciones'">
         <mat-header-cell *matHeaderCellDef> {{ columnHeaders[column] }} </mat-header-cell>
         <mat-cell *matCellDef="let element"  class="container-acciones">
-          <a class="btn-acciones"><i class='bx bx-edit-alt'></i></a>
+          <a class="btn-acciones" (click)="editRutina(element)"><i class='bx bx-edit-alt'></i></a>
           <a class="btn-acciones" (click)="removeRutina(element)"><i class='bx bx-trash'></i></a>
         </mat-cell>
       </div>

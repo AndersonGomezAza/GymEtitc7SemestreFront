@@ -6,6 +6,7 @@ import { ApiService } from 'src/app/services/api.service';
 import { FormRutinasComponent } from '../forms/form-rutinas/form-rutinas.component';
 import { MatDialog } from '@angular/material/dialog';
 import Swal from 'sweetalert2';
+import { ModalService } from 'src/app/modal/modal.service';
 
 @Component({
   selector: 'app-rutinas',
@@ -28,8 +29,9 @@ export class RutinasComponent implements OnInit, AfterViewInit {
     acciones: 'Acciones',
   };
 
+  accion: string = "Crear";
 
-  constructor(public apiService: ApiService, public dialog:MatDialog) {
+  constructor(public apiService: ApiService, public dialog:MatDialog, public modalService: ModalService) {
     this.dataSource = new MatTableDataSource()
   }
 
@@ -54,8 +56,19 @@ export class RutinasComponent implements OnInit, AfterViewInit {
   }
 
   openDialog() {
+    this.modalService.acciones.next(this.accion);
     this.dialog.open(FormRutinasComponent, {
       width: '60%',
+    });
+  }
+
+  editRutina(element: any) {
+    this.modalService.acciones.next("Editar");
+
+    this.dialog.open(FormRutinasComponent, {
+      height: 'auto',
+      width: 'auto',
+      data: element // El objeto 'element' ahora contiene los datos del dueño a editar
     });
   }
 
